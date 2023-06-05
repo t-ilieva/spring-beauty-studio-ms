@@ -30,10 +30,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-    <div th:insert="navbar"></div>
-    <div th:insert="sidebar"></div>
+    <div th:insert="fragments/navbar"></div>
+    <div th:insert="fragments/sidebar"></div>
     <div class="content-wrapper">
-        <div th:insert="header"></div>
+        <div th:insert="fragments/header"></div>
         <!-- Content Header (Page header) -->
         <section class="content">
             <div class="container-fluid">
@@ -93,7 +93,7 @@
             </div>
         </section>
     </div>
-    <span th:replace="footer"></span>
+    <span th:replace="fragments/footer"></span>
 
 </div>
 <!-- /.content-wrapper -->

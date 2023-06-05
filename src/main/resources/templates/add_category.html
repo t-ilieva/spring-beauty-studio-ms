@@ -34,54 +34,48 @@
     <div th:insert="fragments/sidebar"></div>
     <div class="content-wrapper">
         <div th:insert="fragments/header"></div>
-        <!-- Content Header (Page header) -->
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Location Details</h3>
-
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
+                                <h3 class="card-title">Add Category</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <div class="card-body">
+                                <form role="form" th:action="@{/addCategory}" th:object="${categoryRequest}" method="post">
+                                    <div class="form-group">
+                                        <label>Category Name</label>
+                                        <input type="text" name="name" th:field="*{name}" class="form-control" placeholder="Enter Category">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                             style="margin-top:10px" th:if="${errorMessage}">
+                                            <div th:text="${errorMessage}"></div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                             style="margin-top:10px" th:if="${successMessage}">
+                                            <div th:text="${successMessage}"></div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Date opened</th>
-                                        <th>Rating</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="location: ${locations}">
-                                        <td th:text="${location.id}"></td>
-                                        <td th:text="${location.name}"></td>
-                                        <td th:text="${location.address}"></td>
-                                        <td th:text="${location.dateOpened}"></td>
-                                        <td th:text="${location.rating}"></td>
-                                        <td><a href=# class="btn btn-success">Edit</a></td>
-                                        <td><a href=# class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary btn-block">Add Category</button>
+                                    </div>
+                                </form>
                             </div>
                             <!-- /.card-body -->
+
                         </div>
                         <!-- /.card -->
                     </div>
@@ -90,7 +84,6 @@
         </section>
     </div>
     <span th:replace="fragments/footer"></span>
-
 </div>
 <!-- /.content-wrapper -->
 
@@ -139,4 +132,3 @@
 </body>
 </html>
 <!-- /.content -->
-
