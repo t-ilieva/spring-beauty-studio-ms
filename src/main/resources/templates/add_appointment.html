@@ -42,32 +42,42 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Service</h3>
+                                <h3 class="card-title">Add Appointment</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
                             <div class="card-body">
-                                <form role="form" th:action="@{/addService}" th:object="${serviceRequest}" method="post">
+                                <form role="form" th:action="@{/addAppointment}" th:object="${appointmentRequest}" method="post">
                                     <div class="form-group">
-                                        <label>Service Name</label>
-                                        <input type="text" name="name" th:field="*{name}" class="form-control" placeholder="Enter Service Name">
+                                        <label>Client Name</label>
+                                        <input type="text" name="clientName" th:field="*{clientName}" class="form-control" placeholder="Enter Client Name">
                                     </div>
                                     <div class="form-group">
-                                        <label>Price</label>
-                                        <input type="number" name="price" th:field="*{price}" class="form-control" min="1" step="0.01" placeholder="Enter Price">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Duration (minutes)</label>
-                                        <input type="number" name="duration" th:field="*{duration}" class="form-control" min="1.0" placeholder="Enter Duration (minutes)">
+                                        <label>Date Appointed</label>
+                                        <input type="date" name="dateAppointed" th:field="*{dateAppointed}" class="form-control" placeholder="Enter Date Appointed">
                                     </div>
                                     <div class="form-group">
                                         <label>Description</label>
                                         <input type="text" name="description" th:field="*{description}" class="form-control" placeholder="Enter Description">
                                     </div>
                                     <div class="form-group">
-                                        <label>Description</label>
-                                        <select th:field="*{categoryRequest.name}" th:class="form-control">
-                                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}">
+                                        <label>Category</label>
+                                        <select th:field="*{serviceRequest.name}" th:class="form-control">
+                                            <option th:each="service : ${services}" th:value="${service.name}" th:text="${service.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Employee</label>
+                                        <select th:field="*{employeeRequest.name}" th:class="form-control">
+                                            <option th:each="employee : ${employees}" th:value="${employee.name}" th:text="${employee.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <select th:field="*{locationRequest.name}" th:class="form-control">
+                                            <option th:each="location : ${locations}" th:value="${location.name}" th:text="${location.name}">
                                             </option>
                                         </select>
                                     </div>
@@ -89,7 +99,7 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-block">Add Service</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Add Appointment</button>
                                     </div>
                                 </form>
                             </div>

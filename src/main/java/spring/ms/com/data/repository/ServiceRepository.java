@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import spring.ms.com.data.entity.Employee;
+import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.entity.Service;
 
 import java.util.List;
@@ -14,4 +15,7 @@ import java.util.Optional;
 public interface ServiceRepository extends JpaRepository<Service, Integer> {
     @Query(value = "SELECT * FROM service a WHERE a.id = category.id AND category.name = :category", nativeQuery = true)
     List<Service> findByCategory(@Param("category") String category);
+
+    Optional<Service> findByName(String name);
+
 }

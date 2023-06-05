@@ -45,8 +45,13 @@ public class EmployeeTransformer {
         return employee;
     }
 
-    public static Employee toEmployeeEntity(EmployeeResponse employeeResponse) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(employeeResponse.getDateEmployed());
+    public static Employee toEmployeeEntity(EmployeeResponse employeeResponse) {
+        Date date = null;
+        try {
+            date = DATE_TIME_FORMATTER.parse(employeeResponse.getDateEmployed());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Employee employee = new Employee();
         employee.setId(employeeResponse.getId());
         employee.setFirstName(employeeResponse.getFirstName());

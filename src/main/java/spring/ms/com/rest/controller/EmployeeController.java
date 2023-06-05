@@ -59,7 +59,7 @@ public class EmployeeController {
         int id = employeeService.createEmployee(employeeRequest);
         Optional<EmployeeResponse> employee = employeeService.getById(id);
         if(employee.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding a service!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding an employee!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");
