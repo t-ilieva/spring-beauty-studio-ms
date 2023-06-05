@@ -16,7 +16,6 @@ public class Appointment {
     @Column(name = "date_appointed")
     private Date dateAppointed;
     private String description;
-    private float price;
 
 
     @ManyToOne
@@ -61,14 +60,6 @@ public class Appointment {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public Service getService() {

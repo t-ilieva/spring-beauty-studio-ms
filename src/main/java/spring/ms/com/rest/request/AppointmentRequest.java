@@ -5,7 +5,6 @@ public class AppointmentRequest {
     private String clientName;
     private String dateAppointed;
     private String description;
-    private float price;
 
     private ServiceRequest serviceRequest;
     private EmployeeRequest employeeRequest;
@@ -33,14 +32,6 @@ public class AppointmentRequest {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public ServiceRequest getServiceRequest() {

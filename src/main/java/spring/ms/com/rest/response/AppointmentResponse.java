@@ -10,7 +10,6 @@ public class AppointmentResponse {
     private String clientName;
     private String dateAppointed;
     private String description;
-    private float price;
 
     private ServiceResponse serviceResponse;
     private EmployeeResponse employeeResponse;
@@ -46,14 +45,6 @@ public class AppointmentResponse {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public ServiceResponse getServiceResponse() {

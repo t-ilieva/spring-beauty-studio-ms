@@ -74,13 +74,13 @@
                   <tbody>
                   <tr th:each="appointment: ${appointments}">
                     <td th:text="${appointment.id}"></td>
-                    <td th:text="${appointment.client}"></td>
+                    <td th:text="${appointment.clientName}"></td>
                     <td th:text="${appointment.dateAppointed}"></td>
                     <td th:text="${appointment.description}"></td>
                     <td th:text="${appointment.serviceResponse.name}"></td>
-                    <td th:text="${appointment.employeeResponse.firstName} {appointment.employeeResponse.lastName}"></td>
-                    <td th:text="${appointment.LocationResponse.name}"></td>
-                    <td th:text="${appointment.price}"></td>
+                    <td th:text= "${appointment.employeeResponse.firstName} + ' ' + ${appointment.employeeResponse.lastName}"></td>
+                    <td th:text="${appointment.locationResponse.name}"></td>
+                    <td th:text="${appointment.serviceResponse.price}"></td>
                     <td><a href=# class="btn btn-success">Edit</a></td>
                     <td><a href=# class="btn btn-danger">Delete</a></td>
                   </tr>

@@ -22,7 +22,6 @@ public class AppointmentTransformer {
         appointmentResponse.setClientName(appointment.getClientName());
         appointmentResponse.setDateAppointed(DATE_TIME_FORMATTER.format(appointment.getDateAppointed()));
         appointmentResponse.setDescription(appointment.getDescription());
-        appointmentResponse.setPrice(appointment.getPrice());
 
         EmployeeResponse employeeResponse = EmployeeTransformer.
                 toEmployeeResponse(appointment.getAppointmentEmployee());
@@ -45,7 +44,6 @@ public class AppointmentTransformer {
         appointment.setClientName(appointmentRequest.getClientName());
         appointment.setDateAppointed(date);
         appointment.setDescription(appointmentRequest.getDescription());
-        appointment.setPrice(appointmentRequest.getPrice());
 
         return appointment;
     }
@@ -57,7 +55,6 @@ public class AppointmentTransformer {
         appointment.setClientName(appointmentResponse.getClientName());
         appointment.setDateAppointed(date);
         appointment.setDescription(appointmentResponse.getDescription());
-        appointment.setPrice(appointmentResponse.getPrice());
 
         return appointment;
     }
