@@ -28,7 +28,7 @@ public class LocationTransformer {
         Date date = DATE_TIME_FORMATTER.parse(locationRequest.getDateOpened());
         Location location = new Location();
         location.setName(locationRequest.getName());
-        location.setAddress(location.getAddress());
+        location.setAddress(locationRequest.getAddress());
         location.setRating(locationRequest.getRating());
         location.setDateOpened(date);
 
