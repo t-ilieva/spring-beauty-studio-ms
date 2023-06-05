@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<link rel="icon" type="image/png" sizes="32x32" href="static\dist\img\favicon-32x32.png">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Course Managament System | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{plugins/fontawesome-free/css/all.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" th:href="@{plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{dist/css/adminlte.min.css}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href=#><b>Course</b>MS</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign In</p>
+
+            <form th:action="@{/home}" method="post">
+                <!--{% csrf_token %}-->
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <!--{% if messages %}
+                <div class="col-12">
+                    {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <!e-- /.col -->
+                <div class="col-12 text-center">
+                    <p class="login-box-msg"><br>Sign Up</p>
+                </div><!-- /.col -->
+                <div class="col-12 text-center">
+                    <b>|</b>
+                    <a href=# style="color: red;">Admin</a> <b>|</b>
+                    <a href=# style="color: orange;">Teacher</a> <b>|</b>
+                    <a href=# style="color: cadetblue;">Student</a> <b>|</b>
+                </div>
+            </form>
+
+            <!-- jQuery -->
+            <script th:src="@{plugins/jquery/jquery.min.js}"></script>
+            <!-- Bootstrap 4 -->
+            <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+            <!-- AdminLTE App -->
+            <script th:src="@{dist/js/adminlte.min.js}"></script>
+        </div>
+</body>
+</html>
