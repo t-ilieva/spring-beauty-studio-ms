@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.repository.LocationRepository;
 import spring.ms.com.rest.request.LocationRequest;
+import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.LocationResponse;
+import spring.ms.com.rest.transformer.CategoryTransformer;
 import spring.ms.com.rest.transformer.LocationTransformer;
 
 import java.text.ParseException;
@@ -27,6 +29,12 @@ public class LocationService {
                 .stream()
                 .map(LocationTransformer::toLocationResponse)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<LocationResponse> getByName(String name){
+        return locationRepository
+                .findByName(name)
+                .map(LocationTransformer::toLocationResponse);
     }
 
     public Optional<LocationResponse> getById(int id){

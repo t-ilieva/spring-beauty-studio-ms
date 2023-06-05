@@ -35,8 +35,13 @@ public class LocationTransformer {
         return location;
     }
 
-    public static Location toLocationEntity(LocationResponse locationResponse) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(locationResponse.getDateOpened());
+    public static Location toLocationEntity(LocationResponse locationResponse){
+        Date date = null;
+        try {
+            date = DATE_TIME_FORMATTER.parse(locationResponse.getDateOpened());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Location location = new Location();
         location.setId(locationResponse.getId());
         location.setName(locationResponse.getName());
