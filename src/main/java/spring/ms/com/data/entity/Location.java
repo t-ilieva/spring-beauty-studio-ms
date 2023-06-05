@@ -15,6 +15,7 @@ public class Location {
     private String name;
     private String address;
     private float rating;
+    @Column(name = "date_opened")
     private Date dateOpened;
 
     @OneToMany(mappedBy = "appointmentLocation")

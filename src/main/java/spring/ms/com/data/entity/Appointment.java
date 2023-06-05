@@ -11,9 +11,9 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name = "client_name")
     private String clientName;
-
-    @Column(name = "date_created")
+    @Column(name = "date_appointed")
     private Date dateAppointed;
     private String description;
     private float price;

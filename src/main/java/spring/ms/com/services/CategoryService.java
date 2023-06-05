@@ -20,7 +20,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryResponse> getALl(){
+    public List<CategoryResponse> getAll(){
         return categoryRepository
                 .findAll()
                 .stream()

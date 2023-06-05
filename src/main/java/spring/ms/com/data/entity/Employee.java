@@ -21,8 +21,6 @@ public class Employee {
     private Date dateEmployed;
     private float rating;
 
-
-    @Column(name = "employee_category")
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category employeeCategory;
