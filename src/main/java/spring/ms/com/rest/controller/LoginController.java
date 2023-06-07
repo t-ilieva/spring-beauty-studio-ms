@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @RequestMapping("/")
-    public String loginPage()
+    public String login()
     {
         return "page_login";
     }
 
     @RequestMapping("/home")
-    public String homePage(Model model)
+    public String home(Model model)
     {
         model.addAttribute("title", "Home");
         return "home_page";

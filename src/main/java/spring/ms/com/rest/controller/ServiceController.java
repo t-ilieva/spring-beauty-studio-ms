@@ -57,7 +57,7 @@ public class ServiceController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editServices(@PathVariable int id, Model model){
+    public String edit(@PathVariable int id, Model model){
         List<CategoryResponse> categories = categoryService.getAll();
         model.addAttribute("title", ("Update Service | ID:" + id));
         model.addAttribute("service", serviceService.getById(id).get());
@@ -66,7 +66,7 @@ public class ServiceController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateService(@PathVariable int id,
+    public String update(@PathVariable int id,
                                  @ModelAttribute("service") ServiceResponse serviceResponse,
                                  RedirectAttributes redirectAttributes, Model model){
 
@@ -82,7 +82,7 @@ public class ServiceController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id, Model model){
+    public String delete(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Service | ID:" + id));
         model.addAttribute("text", "service");
         model.addAttribute("type", "services");
@@ -91,7 +91,7 @@ public class ServiceController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         serviceService.deleteService(id);
         return "redirect:/services";
     }

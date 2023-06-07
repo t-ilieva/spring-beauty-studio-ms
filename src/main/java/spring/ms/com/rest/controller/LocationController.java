@@ -51,14 +51,14 @@ public class LocationController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editLocation(@PathVariable int id, Model model){
+    public String edit(@PathVariable int id, Model model){
         model.addAttribute("title", ("Update Location | ID:" + id));
         model.addAttribute("location", locationService.getById(id).get());
         return "edit_location";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateLocation(@PathVariable int id,
+    public String update(@PathVariable int id,
                                  @ModelAttribute("location") LocationRequest locationRequest,
                                  RedirectAttributes redirectAttributes, Model model){
 
@@ -74,7 +74,7 @@ public class LocationController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id, Model model){
+    public String delete(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Location | ID:" + id));
         model.addAttribute("text", "location");
         model.addAttribute("type", "locations");

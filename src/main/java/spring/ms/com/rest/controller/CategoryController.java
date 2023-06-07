@@ -50,14 +50,14 @@ public class CategoryController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editCategory(@PathVariable int id, Model model){
+    public String edit(@PathVariable int id, Model model){
         model.addAttribute("title", ("Update Category | ID:" + id));
         model.addAttribute("category", categoryService.getById(id).get());
         return "edit_category";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateCategory(@PathVariable int id,
+    public String update(@PathVariable int id,
                                  @ModelAttribute("category") CategoryRequest categoryRequest,
                                  RedirectAttributes redirectAttributes, Model model){
 
@@ -73,7 +73,7 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id, Model model){
+    public String delete(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Category | ID:" + id));
         model.addAttribute("text", "category");
         model.addAttribute("type", "categories");
@@ -82,7 +82,7 @@ public class CategoryController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         categoryService.deleteCategory(id);
         return "redirect:/categories";
     }

@@ -64,7 +64,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editEmployee(@PathVariable int id, Model model){
+    public String edit(@PathVariable int id, Model model){
         EmployeeResponse employeeResponse = employeeService.getById(id).get();
         List<LocationResponse> locations = locationService.getAll();
         List<CategoryResponse> categories = categoryService.getAll();
@@ -76,7 +76,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateEmployee(@PathVariable int id,
+    public String update(@PathVariable int id,
                                  @ModelAttribute("employee") EmployeeResponse employeeResponse,
                                  RedirectAttributes redirectAttributes, Model model){
 
@@ -92,7 +92,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id, Model model){
+    public String delete(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Employee | ID:" + id));
         model.addAttribute("text", "employee");
         model.addAttribute("type", "employees");
@@ -101,7 +101,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         employeeService.deleteEmployee(id);
         return "redirect:/employees";
     }

@@ -66,7 +66,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editServices(@PathVariable int id, Model model){
+    public String edit(@PathVariable int id, Model model){
         List<LocationResponse> locations = locationService.getAll();
         List<ServiceResponse> services = serviceService.getAll();
         List<EmployeeResponse> employees = employeeService.getAll();
@@ -79,7 +79,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateService(@PathVariable int id,
+    public String update(@PathVariable int id,
                                 @ModelAttribute("appointment") AppointmentResponse appointmentResponse,
                                 RedirectAttributes redirectAttributes, Model model){
 
@@ -95,7 +95,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id, Model model){
+    public String delete(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Location | ID:" + id));
         model.addAttribute("text", "appointment");
         model.addAttribute("type", "appointments");
@@ -104,7 +104,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteLocation(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         appointmentService.deleteAppointment(id);
         return "redirect:/appointments";
     }
