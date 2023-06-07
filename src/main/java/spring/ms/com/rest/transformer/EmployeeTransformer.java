@@ -22,14 +22,15 @@ public class EmployeeTransformer {
         employeeResponse.setFirstName(employee.getFirstName());
         employeeResponse.setLastName(employee.getLastName());
         employeeResponse.setDateEmployed(DATE_TIME_FORMATTER.format(employee.getDateEmployed()));
+        employeeResponse.setEmployeeNumber(employee.getEmployeeNumber());
         employeeResponse.setRating(employee.getRating());
 
-        CategoryResponse categoryResponse = CategoryTransformer.
-                toCategoryResponse(employee.getEmployeeCategory());
+//        CategoryResponse categoryResponse = CategoryTransformer.
+//                toCategoryResponse(employee.getEmployeeCategory());
         LocationResponse locationResponse = LocationTransformer.
                 toLocationResponse(employee.getEmployeeLocation());
 
-        employeeResponse.setCategoryResponse(categoryResponse);
+//        employeeResponse.setCategoryResponse(categoryResponse);
         employeeResponse.setLocationResponse(locationResponse);
 
         return employeeResponse;
@@ -47,6 +48,7 @@ public class EmployeeTransformer {
         employee.setFirstName(employeeRequest.getFirstName());
         employee.setLastName(employeeRequest.getLastName());
         employee.setDateEmployed(date);
+        employee.setEmployeeNumber(employeeRequest.getEmployeeNumber());
         employee.setRating(employeeRequest.getRating());
 
         return employee;
@@ -69,6 +71,7 @@ public class EmployeeTransformer {
         employee.setFirstName(employeeResponse.getFirstName());
         employee.setLastName(employeeResponse.getLastName());
         employee.setDateEmployed(date);
+        employee.setEmployeeNumber(employeeResponse.getEmployeeNumber());
         employee.setRating(employeeResponse.getRating());
 //        employee.setEmployeeCategory(category);
 //        employee.setEmployeeLocation(location);

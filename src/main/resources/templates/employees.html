@@ -64,7 +64,8 @@
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Date Employed</th>
-                                        <th>Category</th>
+                                        <th>Employee Number</th>
+<!--                                        <th>Category</th>-->
                                         <th>Location</th>
                                         <th>Rating</th>
                                         <th>Action</th>
@@ -76,7 +77,8 @@
                                         <td th:text="${employee.firstName}"></td>
                                         <td th:text="${employee.lastName}"></td>
                                         <td th:text="${employee.dateEmployed}"></td>
-                                        <td th:text="${employee.categoryResponse.name}"></td>
+                                        <td th:text="${employee.employeeNumber}"></td>
+<!--                                        <td th:text="${employee.categoryResponse.name}"></td>-->
                                         <td th:text="${employee.locationResponse.name}"></td>
                                         <td th:text="${employee.rating}"></td>
                                         <td><a th:href="@{employees/edit/{id}(id=${employee.id})}" class="btn btn-success">Edit</a></td>

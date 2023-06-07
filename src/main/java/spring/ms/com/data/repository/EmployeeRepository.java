@@ -13,4 +13,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query(value = "SELECT * FROM employee a WHERE a.first_name = :first_name and a.last_name = :last_name", nativeQuery = true)
     Optional<Employee> findByName(@Param("first_name") String firstName, @Param("last_name") String lastName);
+
+    @Query(value = "SELECT * FROM employee a WHERE a.employee_number = :employee_number", nativeQuery = true)
+    Optional<Employee> findByEmployeeNumber(@Param("employee_number") String employeeNumber);
+
 }

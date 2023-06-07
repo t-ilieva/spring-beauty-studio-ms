@@ -19,11 +19,13 @@ public class Employee {
     private String lastName;
     @Column(name = "date_employed")
     private Date dateEmployed;
+    @Column(name = "employee_number")
+    private String employeeNumber;
     private float rating;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category employeeCategory;
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private Category employeeCategory;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -64,6 +66,14 @@ public class Employee {
         this.dateEmployed = dateEmployed;
     }
 
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
     public float getRating() {
         return rating;
     }
@@ -72,13 +82,13 @@ public class Employee {
         this.rating = rating;
     }
 
-    public Category getEmployeeCategory() {
-        return employeeCategory;
-    }
-
-    public void setEmployeeCategory(Category employeeCategory) {
-        this.employeeCategory = employeeCategory;
-    }
+//    public Category getEmployeeCategory() {
+//        return employeeCategory;
+//    }
+//
+//    public void setEmployeeCategory(Category employeeCategory) {
+//        this.employeeCategory = employeeCategory;
+//    }
 
     public Location getEmployeeLocation() {
         return employeeLocation;

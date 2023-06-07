@@ -41,7 +41,7 @@ public class LocationService {
                 .map(LocationTransformer::toLocationResponse);
     }
 
-    public int createLocation(LocationRequest locationRequest) throws ParseException {
+    public int createLocation(LocationRequest locationRequest) {
         Location location = LocationTransformer
                 .toLocationEntity(locationRequest);
         return locationRepository.save(location).getId();

@@ -12,7 +12,7 @@ import spring.ms.com.services.EmployeeService;
 import spring.ms.com.services.LocationService;
 import spring.ms.com.services.ServiceService;
 
-import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,22 +38,45 @@ public class AppointmentController {
     }
 
     @GetMapping("/add")
-    public String create(Model model){
-        AppointmentRequest appointmentRequest = new AppointmentRequest();
+    public String selectLocation(Model model){
         List<LocationResponse> locations = locationService.getAll();
-        List<ServiceResponse> services = serviceService.getAll();
-        List<EmployeeResponse> employees = employeeService.getAll();
+        LocationResponse locationResponse = new LocationResponse();
         model.addAttribute("title", "Add Appointment");
-        model.addAttribute("appointmentRequest", appointmentRequest);
-        model.addAttribute("services", services);
+        model.addAttribute("locationResponse", locationResponse);
         model.addAttribute("locations", locations);
-        //model.addAttribute("employees", employees);
-        return "add_appointment";
+        return "add_appointment_location";
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("appointmentRequest") AppointmentRequest appointmentRequest,
-                       RedirectAttributes redirectAttributes) throws ParseException {
+    public String selectLocation(@ModelAttribute("locationResponse") final LocationResponse locationResponse,
+                                        RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("locationResponse", locationResponse);
+
+        return "redirect:/appointments/add/details";
+    }
+
+    @GetMapping("/add/details")
+    public String create(Model model, @ModelAttribute("locationResponse") final LocationResponse locationResponse){
+        AppointmentRequest appointmentRequest = new AppointmentRequest();
+        List<ServiceResponse> services = serviceService.getAll();
+        List<EmployeeResponse> allEmployees = employeeService.getAll();
+        List<EmployeeResponse> employees = new ArrayList<>();
+
+        for (EmployeeResponse e: allEmployees) {
+            if (e.getLocationResponse().getName().equals(locationResponse.getName())){
+                employees.add(e);
+            }
+        }
+        model.addAttribute("title", "Add Appointment");
+        model.addAttribute("appointmentRequest", appointmentRequest);
+        model.addAttribute("services", services);
+        model.addAttribute("employees", employees);
+        return "add_appointment_details";
+    }
+
+    @PostMapping("/add/details")
+    public String save(@ModelAttribute("appointmentRequest") AppointmentRequest appointmentRequest, RedirectAttributes redirectAttributes) {
         int id = appointmentService.createAppointment(appointmentRequest);
         Optional<AppointmentResponse> appointment = appointmentService.getById(id);
         if(appointment.isEmpty()) {
@@ -66,19 +89,51 @@ public class AppointmentController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable int id, Model model){
+    public String editLocation(@PathVariable int id, Model model){
         List<LocationResponse> locations = locationService.getAll();
-        List<ServiceResponse> services = serviceService.getAll();
-        List<EmployeeResponse> employees = employeeService.getAll();
+        LocationResponse locationResponse = new LocationResponse();
         model.addAttribute("title", ("Update Appointment | ID: " + id));
         model.addAttribute("appointment", appointmentService.getById(id).get());
-        model.addAttribute("services", services);
+        model.addAttribute("locationResponse", appointmentService
+                .getById(id)
+                .get()
+                .getEmployeeResponse()
+                .getLocationResponse());
         model.addAttribute("locations", locations);
-        //model.addAttribute("employees", employees);
-        return "edit_appointment";
+        return "edit_appointment_location";
     }
 
     @PostMapping("/edit/{id}")
+    public String editLocation(@PathVariable int id,
+                               @ModelAttribute("locationResponse") final LocationResponse locationResponse,
+                               RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("locationResponse", locationResponse);
+
+        return "redirect:/appointments/edit/details/{id}";
+    }
+
+    @GetMapping("/edit/details/{id}")
+    public String edit(@PathVariable int id, Model model,
+                       @ModelAttribute("locationResponse") final LocationResponse locationResponse){
+
+        List<ServiceResponse> services = serviceService.getAll();
+        List<EmployeeResponse> allEmployees = employeeService.getAll();
+        List<EmployeeResponse> employees = new ArrayList<>();
+
+        for (EmployeeResponse e: allEmployees) {
+            if (e.getLocationResponse().getName().equals(locationResponse.getName())) {
+                employees.add(e);
+            }
+        }
+        model.addAttribute("title", ("Update Appointment | ID: " + id));
+        model.addAttribute("appointment", appointmentService.getById(id).get());
+        model.addAttribute("services", services);
+        model.addAttribute("employees", employees);
+        return "edit_appointment_details";
+    }
+
+    @PostMapping("/edit/details/{id}")
     public String update(@PathVariable int id,
                                 @ModelAttribute("appointment") AppointmentResponse appointmentResponse,
                                 RedirectAttributes redirectAttributes, Model model){

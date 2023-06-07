@@ -3,6 +3,7 @@ package spring.ms.com.rest.transformer;
 import spring.ms.com.data.entity.Appointment;
 import spring.ms.com.rest.request.AppointmentRequest;
 import spring.ms.com.rest.response.AppointmentResponse;
+import spring.ms.com.rest.response.EmployeeResponse;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 
@@ -21,24 +22,32 @@ public class AppointmentTransformer {
         appointmentResponse.setDateAppointed(DATE_TIME_FORMATTER.format(appointment.getDateAppointed()));
         appointmentResponse.setDescription(appointment.getDescription());
 
-//        EmployeeResponse employeeResponse = EmployeeTransformer.
-//                toEmployeeResponse(appointment.getAppointmentEmployee());
-        LocationResponse locationResponse = LocationTransformer.
-                toLocationResponse(appointment.getAppointmentLocation());
+        EmployeeResponse employeeResponse = EmployeeTransformer.
+                toEmployeeResponse(appointment.getAppointmentEmployee());
+//        LocationResponse locationResponse = LocationTransformer.
+//                toLocationResponse(appointment.getAppointmentLocation());
         ServiceResponse serviceResponse = ServiceTransformer.
                 toServiceResponse(appointment.getService());
 
-        //appointmentResponse.setEmployeeResponse(employeeResponse);
-        appointmentResponse.setLocationResponse(locationResponse);
+        appointmentResponse.setEmployeeResponse(employeeResponse);
+        //appointmentResponse.setLocationResponse(locationResponse);
         appointmentResponse.setServiceResponse(serviceResponse);
 
         return appointmentResponse;
     }
 
 
-    public static Appointment toAppointmentEntity(AppointmentRequest appointmentRequest) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(appointmentRequest.getDateAppointed());
+    public static Appointment toAppointmentEntity(AppointmentRequest appointmentRequest){
+        Date date = null;
+
+        try {
+            date = DATE_TIME_FORMATTER.parse(appointmentRequest.getDateAppointed());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
         Appointment appointment = new Appointment();
+
         appointment.setClientName(appointmentRequest.getClientName());
         appointment.setDateAppointed(date);
         appointment.setDescription(appointmentRequest.getDescription());

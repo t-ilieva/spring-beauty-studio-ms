@@ -7,9 +7,10 @@ public class EmployeeResponse {
     private String firstName;
     private String lastName;
     private String dateEmployed;
+    private String employeeNumber;
     private float rating;
 
-    private CategoryResponse categoryResponse;
+//    private CategoryResponse categoryResponse;
     private LocationResponse locationResponse;
 
     public int getId() {
@@ -44,6 +45,14 @@ public class EmployeeResponse {
         this.dateEmployed = dateEmployed;
     }
 
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
     public float getRating() {
         return rating;
     }
@@ -52,13 +61,13 @@ public class EmployeeResponse {
         this.rating = rating;
     }
 
-    public CategoryResponse getCategoryResponse() {
-        return categoryResponse;
-    }
-
-    public void setCategoryResponse(CategoryResponse categoryResponse) {
-        this.categoryResponse = categoryResponse;
-    }
+//    public CategoryResponse getCategoryResponse() {
+//        return categoryResponse;
+//    }
+//
+//    public void setCategoryResponse(CategoryResponse categoryResponse) {
+//        this.categoryResponse = categoryResponse;
+//    }
 
     public LocationResponse getLocationResponse() {
         return locationResponse;

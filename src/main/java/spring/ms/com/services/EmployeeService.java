@@ -27,16 +27,12 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final LocationRepository locationRepository;
-    private final CategoryRepository categoryRepository;
     private final LocationService locationService;
-    private final CategoryService categoryService;
 
     public EmployeeService(EmployeeRepository employeeRepository, LocationRepository locationRepository, CategoryRepository categoryRepository, LocationService locationService, CategoryService categoryService) {
         this.employeeRepository = employeeRepository;
         this.locationRepository = locationRepository;
-        this.categoryRepository = categoryRepository;
         this.locationService = locationService;
-        this.categoryService = categoryService;
     }
 
     public List<EmployeeResponse> getAll(){
@@ -53,28 +49,34 @@ public class EmployeeService {
                 .map(EmployeeTransformer::toEmployeeResponse);
     }
 
+    public Optional<EmployeeResponse> getByEmployeeNumber(String employeeNumber){
+        return employeeRepository
+                .findByEmployeeNumber(employeeNumber)
+                .map(EmployeeTransformer::toEmployeeResponse);
+    }
+
     public Optional<EmployeeResponse> getById(int id){
         return employeeRepository
                 .findById(id)
                 .map(EmployeeTransformer::toEmployeeResponse);
     }
 
-    public int createEmployee(EmployeeRequest employeeRequest) throws ParseException {
+    public int createEmployee(EmployeeRequest employeeRequest) {
         Employee employee = EmployeeTransformer
                 .toEmployeeEntity(employeeRequest);
 
-        CategoryRequest categoryRequest = employeeRequest.getCategoryRequest();
-        Optional<Category> category;
+//        CategoryRequest categoryRequest = employeeRequest.getCategoryRequest();
+//        Optional<Category> category;
 
         LocationRequest locationRequest = employeeRequest.getLocationRequest();
         Optional<Location> location;
 
-        if (categoryRepository.findByName(categoryRequest.getName()).isEmpty()) {
-            int id = categoryService.createCategory(categoryRequest);
-            category = categoryService.getById(id).map(CategoryTransformer::toCategoryEntity);
-        } else {
-            category = categoryRepository.findByName(categoryRequest.getName());
-        }
+//        if (categoryRepository.findByName(categoryRequest.getName()).isEmpty()) {
+//            int id = categoryService.createCategory(categoryRequest);
+//            category = categoryService.getById(id).map(CategoryTransformer::toCategoryEntity);
+//        } else {
+//            category = categoryRepository.findByName(categoryRequest.getName());
+//        }
 
         if (locationRepository.findByName(locationRequest.getName()).isEmpty()) {
             int id = locationService.createLocation(locationRequest);
@@ -86,7 +88,7 @@ public class EmployeeService {
 
 
         employee.setEmployeeLocation(location.get());
-        employee.setEmployeeCategory(category.get());
+//        employee.setEmployeeCategory(category.get());
         return employeeRepository.save(employee).getId();
     }
 
@@ -94,13 +96,13 @@ public class EmployeeService {
         Employee employee = EmployeeTransformer
                 .toEmployeeEntity(employeeResponse);
 
-        CategoryResponse categoryResponse = employeeResponse.getCategoryResponse();
+//        CategoryResponse categoryResponse = employeeResponse.getCategoryResponse();
         LocationResponse locationResponse = employeeResponse.getLocationResponse();
 
-        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
+//        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
         Location location = locationRepository.findByName(locationResponse.getName()).get();
 
-        employee.setEmployeeCategory(category);
+//        employee.setEmployeeCategory(category);
         employee.setEmployeeLocation(location);
         employee.setId(id);
 

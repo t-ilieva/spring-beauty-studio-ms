@@ -9,7 +9,7 @@ public class AppointmentResponse {
 
     private ServiceResponse serviceResponse;
     private EmployeeResponse employeeResponse;
-    private LocationResponse locationResponse;
+//    private LocationResponse locationResponse;
 
     public int getId() {
         return id;
@@ -59,11 +59,11 @@ public class AppointmentResponse {
         this.employeeResponse = employeeResponse;
     }
 
-    public LocationResponse getLocationResponse() {
-        return locationResponse;
-    }
-
-    public void setLocationResponse(LocationResponse locationResponse) {
-        this.locationResponse = locationResponse;
-    }
+//    public LocationResponse getLocationResponse() {
+//        return locationResponse;
+//    }
+//
+//    public void setLocationResponse(LocationResponse locationResponse) {
+//        this.locationResponse = locationResponse;
+//    }
 }

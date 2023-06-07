@@ -5,9 +5,10 @@ public class EmployeeRequest {
     private String firstName;
     private String lastName;
     private String dateEmployed;
+    private String employeeNumber;
     private float rating;
 
-    private CategoryRequest categoryRequest;
+//    private CategoryRequest categoryRequest;
     private LocationRequest locationRequest;
 
     public String getFirstName() {
@@ -34,6 +35,14 @@ public class EmployeeRequest {
         this.dateEmployed = dateEmployed;
     }
 
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
     public float getRating() {
         return rating;
     }
@@ -42,13 +51,13 @@ public class EmployeeRequest {
         this.rating = rating;
     }
 
-    public CategoryRequest getCategoryRequest() {
-        return categoryRequest;
-    }
-
-    public void setCategoryRequest(CategoryRequest categoryRequest) {
-        this.categoryRequest = categoryRequest;
-    }
+//    public CategoryRequest getCategoryRequest() {
+//        return categoryRequest;
+//    }
+//
+//    public void setCategoryRequest(CategoryRequest categoryRequest) {
+//        this.categoryRequest = categoryRequest;
+//    }
 
     public LocationRequest getLocationRequest() {
         return locationRequest;

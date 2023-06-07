@@ -15,6 +15,7 @@ public interface ServiceRepository extends JpaRepository<Service, Integer> {
     @Query(value = "SELECT * FROM service a WHERE a.id = category.id AND category.name = :category", nativeQuery = true)
     List<Service> findByCategory(@Param("category") String category);
 
-    Optional<Service> findByName(String name);
+    @Query(value = "SELECT * FROM service a WHERE a.name = :name", nativeQuery = true)
+    Optional<Service> findByName(@Param("name") String name);
 
 }

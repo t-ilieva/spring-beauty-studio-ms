@@ -17,8 +17,8 @@ public class Category {
     @OneToMany(mappedBy = "serviceCategory")
     private List<Service> services;
 
-    @OneToMany(mappedBy = "employeeCategory")
-    private List<Employee> employees;
+//    @OneToMany(mappedBy = "employeeCategory")
+//    private List<Employee> employees;
 
     public int getId() {
         return id;
@@ -44,11 +44,11 @@ public class Category {
         this.services = services;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 }

@@ -18,8 +18,8 @@ public class Location {
     @Column(name = "date_opened")
     private Date dateOpened;
 
-    @OneToMany(mappedBy = "appointmentLocation")
-    private List<Appointment> appointments;
+//    @OneToMany(mappedBy = "appointmentLocation")
+//    private List<Appointment> appointments;
 
     @OneToMany(mappedBy = "employeeLocation")
     private List<Employee> employees;
@@ -64,13 +64,13 @@ public class Location {
         this.dateOpened = dateOpened;
     }
 
-    public List<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
+//    public List<Appointment> getAppointments() {
+//        return appointments;
+//    }
+//
+//    public void setAppointments(List<Appointment> appointments) {
+//        this.appointments = appointments;
+//    }
 
     public List<Employee> getEmployees() {
         return employees;

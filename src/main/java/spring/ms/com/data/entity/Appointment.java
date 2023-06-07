@@ -26,9 +26,9 @@ public class Appointment {
     @JoinColumn(name = "employee_id")
     private Employee appointmentEmployee;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location appointmentLocation;
+//    @ManyToOne
+//    @JoinColumn(name = "location_id")
+//    private Location appointmentLocation;
 
     public int getId() {
         return id;
@@ -78,11 +78,11 @@ public class Appointment {
         this.appointmentEmployee = appointmentEmployee;
     }
 
-    public Location getAppointmentLocation() {
-        return appointmentLocation;
-    }
-
-    public void setAppointmentLocation(Location appointmentLocation) {
-        this.appointmentLocation = appointmentLocation;
-    }
+//    public Location getAppointmentLocation() {
+//        return appointmentLocation;
+//    }
+//
+//    public void setAppointmentLocation(Location appointmentLocation) {
+//        this.appointmentLocation = appointmentLocation;
+//    }
 }
