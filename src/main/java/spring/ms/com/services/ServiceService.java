@@ -8,6 +8,7 @@ import spring.ms.com.data.repository.ServiceRepository;
 import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.request.ServiceRequest;
+import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 import spring.ms.com.rest.transformer.CategoryTransformer;
 import spring.ms.com.rest.transformer.LocationTransformer;
@@ -72,10 +73,16 @@ public class ServiceService {
         return serviceRepository.save(service).getId();
     }
 
-    public int editService(int id, ServiceRequest serviceRequest){
+    public int editService(int id, ServiceResponse serviceResponse){
         Service service = ServiceTransformer
-                .toServiceEntity(serviceRequest);
+                .toServiceEntity(serviceResponse);
+
+        CategoryResponse categoryResponse = serviceResponse.getCategoryResponse();
+        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
+
+        service.setServiceCategory(category);
         service.setId(id);
+
         return serviceRepository.save(service).getId();
     }
 

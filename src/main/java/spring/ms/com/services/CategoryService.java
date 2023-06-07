@@ -51,7 +51,9 @@ public class CategoryService {
     public int editCategory(int id, CategoryRequest categoryRequest){
         Category category = CategoryTransformer
                 .toCategoryEntity(categoryRequest);
+
         category.setId(id);
+
         return categoryRepository.save(category).getId();
     }
 

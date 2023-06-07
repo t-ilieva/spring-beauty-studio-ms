@@ -60,17 +60,19 @@ public class ServiceController {
 
     @GetMapping("/edit/{id}")
     public String editServices(@PathVariable int id, Model model){
-        model.addAttribute("title", "Update Service");
+        List<CategoryResponse> categories = categoryService.getAll();
+        model.addAttribute("title", ("Update Service | ID:" + id));
         model.addAttribute("service", serviceService.getById(id).get());
+        model.addAttribute("categories", categories);
         return "edit_service";
     }
 
     @PostMapping("/edit/{id}")
     public String updateService(@PathVariable int id,
-                                 @ModelAttribute("service") ServiceRequest serviceRequest,
+                                 @ModelAttribute("service") ServiceResponse serviceResponse,
                                  RedirectAttributes redirectAttributes, Model model){
 
-        int newId = serviceService.editService(id, serviceRequest);
+        int newId = serviceService.editService(id, serviceResponse);
         Optional<ServiceResponse> service = serviceService.getById(id);
         if(service.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected service!");

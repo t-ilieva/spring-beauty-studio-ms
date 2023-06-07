@@ -100,12 +100,11 @@ public class EmployeeService {
 //    }
 
     public int editEmployee(int id, EmployeeResponse employeeResponse){
+        Employee employee = EmployeeTransformer
+                .toEmployeeEntity(employeeResponse);
 
         CategoryResponse categoryResponse = employeeResponse.getCategoryResponse();
         LocationResponse locationResponse = employeeResponse.getLocationResponse();
-        Employee employee = EmployeeTransformer.toEmployeeEntity(employeeResponse);
-//        Optional<Category> category;
-//        Optional<Location> location;
 
         Category category = categoryRepository.findByName(categoryResponse.getName()).get();
         Location location = locationRepository.findByName(locationResponse.getName()).get();

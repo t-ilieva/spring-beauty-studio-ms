@@ -52,7 +52,7 @@ public class CategoryController {
 
     @GetMapping("/edit/{id}")
     public String editCategory(@PathVariable int id, Model model){
-        model.addAttribute("title", "Update Category");
+        model.addAttribute("title", ("Update Category | ID:" + id));
         model.addAttribute("category", categoryService.getById(id).get());
         return "edit_category";
     }

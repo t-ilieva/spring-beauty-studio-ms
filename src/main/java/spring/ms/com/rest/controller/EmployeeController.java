@@ -74,7 +74,7 @@ public class EmployeeController {
         EmployeeResponse employeeResponse = employeeService.getById(id).get();
         List<LocationResponse> locations = locationService.getAll();
         List<CategoryResponse> categories = categoryService.getAll();
-        model.addAttribute("title", "Update Employee");
+        model.addAttribute("title", ("Update Employee | ID:" + id));
         model.addAttribute("employee", employeeResponse);
         model.addAttribute("categories", categories);
         model.addAttribute("locations", locations);

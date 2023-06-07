@@ -55,7 +55,9 @@ public class LocationService {
     public int editLocation(int id, LocationRequest locationRequest){
         Location location = LocationTransformer
                 .toLocationEntity(locationRequest);
+
         location.setId(id);
+
         return locationRepository.save(location).getId();
     }
 

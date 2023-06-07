@@ -74,10 +74,10 @@
                                         <td th:text="${service.id}"></td>
                                         <td th:text="${service.name}"></td>
                                         <td th:text="${service.categoryResponse.name}"></td>
-                                        <td th:text="${service.duration}"></td>
+                                        <td th:text="${service.duration} + ' min'"></td>
                                         <td th:text="${service.description}"></td>
-                                        <td th:text="${service.price}"></td>
-                                        <td><a href=th:href="@{services/edit/{id}(id=${service.id})}" class="btn btn-success">Edit</a></td>
+                                        <td th:text="${service.price} + ' lv'"></td>
+                                        <td><a th:href="@{services/edit/{id}(id=${service.id})}" class="btn btn-success">Edit</a></td>
                                         <td><a href=# class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>

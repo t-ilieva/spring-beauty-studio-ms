@@ -75,7 +75,7 @@
                                         <td th:text="${location.address}"></td>
                                         <td th:text="${location.dateOpened}"></td>
                                         <td th:text="${location.rating}"></td>
-                                        <td><a href=th:href="@{locations/edit/{id}(id=${location.id})}" class="btn btn-success">Edit</a></td>
+                                        <td><a th:href="@{locations/edit/{id}(id=${location.id})}" class="btn btn-success">Edit</a></td>
                                         <td><a href=# class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>
