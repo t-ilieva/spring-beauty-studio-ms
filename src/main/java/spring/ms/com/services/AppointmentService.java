@@ -2,7 +2,6 @@ package spring.ms.com.services;
 
 import org.springframework.stereotype.Service;
 import spring.ms.com.data.entity.Appointment;
-import spring.ms.com.data.entity.Employee;
 import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.repository.AppointmentRepository;
 import spring.ms.com.data.repository.EmployeeRepository;

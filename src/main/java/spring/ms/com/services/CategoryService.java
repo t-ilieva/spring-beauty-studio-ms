@@ -1,9 +1,6 @@
 package spring.ms.com.services;
 
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import spring.ms.com.data.entity.Category;
 import spring.ms.com.data.repository.CategoryRepository;
 import spring.ms.com.rest.request.CategoryRequest;

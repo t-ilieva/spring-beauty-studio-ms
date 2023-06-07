@@ -1,8 +1,8 @@
 package spring.ms.com.rest.transformer;
 
-import spring.ms.com.data.entity.Category;
+//import spring.ms.com.data.entity.Category;
+//import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.entity.Employee;
-import spring.ms.com.data.entity.Location;
 import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.EmployeeResponse;

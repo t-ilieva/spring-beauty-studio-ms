@@ -1,9 +1,5 @@
 package spring.ms.com.rest.response;
 
-import jakarta.persistence.*;
-
-import java.util.Date;
-
 public class AppointmentResponse {
 
     private int id;

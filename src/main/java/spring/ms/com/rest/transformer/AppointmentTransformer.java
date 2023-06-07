@@ -1,10 +1,8 @@
 package spring.ms.com.rest.transformer;
 
 import spring.ms.com.data.entity.Appointment;
-import spring.ms.com.data.entity.Employee;
 import spring.ms.com.rest.request.AppointmentRequest;
 import spring.ms.com.rest.response.AppointmentResponse;
-import spring.ms.com.rest.response.EmployeeResponse;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 

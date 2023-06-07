@@ -1,17 +1,14 @@
 package spring.ms.com.services;
 
 import spring.ms.com.data.entity.Category;
-import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.entity.Service;
 import spring.ms.com.data.repository.CategoryRepository;
 import spring.ms.com.data.repository.ServiceRepository;
 import spring.ms.com.rest.request.CategoryRequest;
-import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.request.ServiceRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 import spring.ms.com.rest.transformer.CategoryTransformer;
-import spring.ms.com.rest.transformer.LocationTransformer;
 import spring.ms.com.rest.transformer.ServiceTransformer;
 
 import java.util.List;
