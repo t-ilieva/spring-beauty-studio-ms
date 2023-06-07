@@ -81,23 +81,6 @@ public class EmployeeController {
         return "edit_employee";
     }
 
-//    @PostMapping("/edit/{id}")
-//    public String updateEmployee(@PathVariable int id,
-//                                 @ModelAttribute("employee") EmployeeResponse employeeResponse,
-//                                 RedirectAttributes redirectAttributes, Model model){
-//
-//        Employee currentEmployee = EmployeeTransformer.toEmployeeEntity(employeeResponse);
-//        int newId = employeeService.editEmployee(id, currentEmployee);
-//        Optional<EmployeeResponse> employee = employeeService.getById(id);
-//        if(employee.isEmpty()) {
-//            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected employee!");
-//        }
-//        else{
-//            redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
-//        }
-//        return "redirect:/employees/edit/{id}";
-//    }
-
     @PostMapping("/edit/{id}")
     public String updateEmployee(@PathVariable int id,
                                  @ModelAttribute("employee") EmployeeResponse employeeResponse,

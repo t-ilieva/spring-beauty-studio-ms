@@ -90,15 +90,6 @@ public class EmployeeService {
         return employeeRepository.save(employee).getId();
     }
 
-//    public int editEmployee(int id, Employee employee){
-//        employee.setId(id);
-//
-//        return employeeRepository.save(employee).getId();
-//    }
-//    public void deleteEmployee(int id){
-//        employeeRepository.deleteById(id);
-//    }
-
     public int editEmployee(int id, EmployeeResponse employeeResponse){
         Employee employee = EmployeeTransformer
                 .toEmployeeEntity(employeeResponse);
