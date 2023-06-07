@@ -99,30 +99,30 @@ public class ServiceController {
     }
 
     @GetMapping("/search")
-    public String search(@ModelAttribute("category") String category, Model model){
+    public String search(@ModelAttribute("service") String service, Model model){
 
-        List<CategoryResponse> categories = categoryService.getAll();
-        List<CategoryResponse> categorySearch = new ArrayList<>();
+        List<ServiceResponse> services= serviceService.getAll();
+        List<ServiceResponse> serviceSearch = new ArrayList<>();
 
-        for (CategoryResponse categoryResponse : categories) {
-            if(categoryResponse.getName().toLowerCase().startsWith(category.toLowerCase())){
-                categorySearch.add(categoryResponse);
+        for (ServiceResponse serviceResponse : services) {
+            if(serviceResponse.getName().toLowerCase().contains(service.toLowerCase())){
+                serviceSearch.add(serviceResponse);
             }
         }
 
-        model.addAttribute("category", "");
-        model.addAttribute("categorySearch", categorySearch);
+        model.addAttribute("service", "");
+        model.addAttribute("serviceSearch", serviceSearch);
 
-        return "search_categories";
+        return "search_services";
     }
 
     @PostMapping("/search")
     public String Search(Model model,
-                         @ModelAttribute("category") String category,
+                         @ModelAttribute("service") String service,
                          RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addFlashAttribute("category", category);
+        redirectAttributes.addFlashAttribute("service", service);
 
-        return "redirect:/categories/search";
+        return "redirect:/services/search";
     }
 }

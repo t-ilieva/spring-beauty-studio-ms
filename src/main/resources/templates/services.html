@@ -44,15 +44,19 @@
                                 <h3 class="card-title">Service Details</h3>
 
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
+                                    <form th:action="@{/services/search}" th:object="${service}" method="post">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="service" th:value="${service}"
+                                                   class="form-control float-right"
+                                                   placeholder="Search By Name">
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
-                                            </button>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default"><i
+                                                        class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -77,8 +81,10 @@
                                         <td th:text="${service.duration} + ' min'"></td>
                                         <td th:text="${service.description}"></td>
                                         <td th:text="${service.price} + ' lv'"></td>
-                                        <td><a th:href="@{services/edit/{id}(id=${service.id})}" class="btn btn-success">Edit</a></td>
-                                        <td><a th:href="@{services/delete/{id}(id=${service.id})}" class="btn btn-danger">Delete</a></td>
+                                        <td><a th:href="@{services/edit/{id}(id=${service.id})}"
+                                               class="btn btn-success">Edit</a></td>
+                                        <td><a th:href="@{services/delete/{id}(id=${service.id})}"
+                                               class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -106,6 +112,7 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
+
 
 
 

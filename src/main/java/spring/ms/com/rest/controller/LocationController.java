@@ -100,7 +100,9 @@ public class LocationController {
         List<LocationResponse> locationSearch = new ArrayList<>();
 
         for (LocationResponse locationResponse : locations) {
-            if(locationResponse.getAddress().toLowerCase().contains(location.toLowerCase())){
+            String address = locationResponse.getAddress().toLowerCase();
+            String name = locationResponse.getName().toLowerCase();
+            if(address.contains(location.toLowerCase()) || name.contains(location.toLowerCase())){
                 locationSearch.add(locationResponse);
             }
         }

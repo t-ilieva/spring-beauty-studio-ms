@@ -28,6 +28,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
+<!-- /.content-wrapper -->
 <div class="wrapper">
 
   <div th:insert="fragments/navbar"></div>
@@ -44,15 +46,17 @@
                 <h3 class="card-title">Appointment Details</h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right"
-                           placeholder="Search">
+                  <form th:action="@{/appointments/search}" th:object="${appointment}" method="post">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" name="appointment"  th:value="${appointment}"class="form-control float-right"
+                             placeholder="Search By Client/Service">
 
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
-                      </button>
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -98,8 +102,6 @@
   <span th:replace="fragments/footer"></span>
 
 </div>
-<!-- /.content-wrapper -->
-
 
 <!-- ./wrapper -->
 
