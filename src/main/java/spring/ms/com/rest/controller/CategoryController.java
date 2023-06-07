@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.response.CategoryResponse;
-import spring.ms.com.rest.transformer.CategoryTransformer;
 import spring.ms.com.services.CategoryService;
 
 import java.util.Optional;
@@ -71,6 +70,21 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
         }
         return "redirect:/categories/edit/{id}";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("text", "category");
+        model.addAttribute("type", "categories");
+        model.addAttribute("item", categoryService.getById(id).get());
+        return "delete_page";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id) {
+        categoryService.deleteCategory(id);
+        return "redirect:/categories";
     }
 }
 

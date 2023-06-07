@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.ms.com.rest.request.CategoryRequest;
-import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.request.LocationRequest;
-import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.services.LocationService;
 

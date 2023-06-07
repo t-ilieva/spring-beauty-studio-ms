@@ -5,16 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.ms.com.data.entity.Employee;
-import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.request.EmployeeRequest;
-import spring.ms.com.rest.request.LocationRequest;
-import spring.ms.com.rest.request.ServiceRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.EmployeeResponse;
 import spring.ms.com.rest.response.LocationResponse;
-import spring.ms.com.rest.response.ServiceResponse;
-import spring.ms.com.rest.transformer.EmployeeTransformer;
 import spring.ms.com.services.CategoryService;
 import spring.ms.com.services.EmployeeService;
 import spring.ms.com.services.LocationService;
@@ -95,5 +89,20 @@ public class EmployeeController {
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
         }
         return "redirect:/employees/edit/{id}";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("text", "employee");
+        model.addAttribute("type", "employees");
+        model.addAttribute("item", employeeService.getById(id).get());
+        return "delete_page";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/employees";
     }
 }

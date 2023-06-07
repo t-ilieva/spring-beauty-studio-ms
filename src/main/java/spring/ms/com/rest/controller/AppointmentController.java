@@ -3,13 +3,9 @@ package spring.ms.com.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.AppointmentRequest;
-import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.response.*;
 import spring.ms.com.services.AppointmentService;
 import spring.ms.com.services.EmployeeService;
@@ -67,5 +63,20 @@ public class AppointmentController {
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");
         }
         return "redirect:/appointments/add";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("text", "appointment");
+        model.addAttribute("type", "appointments");
+        model.addAttribute("item", appointmentService.getById(id).get());
+        return "delete_page";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id) {
+        appointmentService.deleteAppointment(id);
+        return "redirect:/appointments";
     }
 }

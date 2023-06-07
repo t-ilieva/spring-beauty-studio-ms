@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.request.ServiceRequest;
 import spring.ms.com.rest.response.CategoryResponse;
-import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 import spring.ms.com.services.CategoryService;
 import spring.ms.com.services.ServiceService;
@@ -81,5 +79,20 @@ public class ServiceController {
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
         }
         return "redirect:/services/edit/{id}";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("text", "service");
+        model.addAttribute("type", "services");
+        model.addAttribute("item", serviceService.getById(id).get());
+        return "delete_page";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id) {
+        serviceService.deleteService(id);
+        return "redirect:/services";
     }
 }
