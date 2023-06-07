@@ -75,4 +75,19 @@ public class LocationController {
         }
         return "redirect:/locations/edit/{id}";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("text", "location");
+        model.addAttribute("type", "locations");
+        model.addAttribute("item", locationService.getById(id).get());
+        return "delete_page";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteLocation(@PathVariable int id) {
+        locationService.deleteLocation(id);
+        return "redirect:/locations";
+    }
 }
