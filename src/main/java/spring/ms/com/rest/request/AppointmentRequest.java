@@ -7,7 +7,7 @@ public class AppointmentRequest {
     private String description;
 
     private ServiceRequest serviceRequest;
-    private EmployeeRequest employeeRequest;
+    //private EmployeeRequest employeeRequest;
     private LocationRequest locationRequest;
 
     public String getClientName() {
@@ -42,13 +42,13 @@ public class AppointmentRequest {
         this.serviceRequest = serviceRequest;
     }
 
-    public EmployeeRequest getEmployeeRequest() {
-        return employeeRequest;
-    }
-
-    public void setEmployeeRequest(EmployeeRequest employeeRequest) {
-        this.employeeRequest = employeeRequest;
-    }
+//    public EmployeeRequest getEmployeeRequest() {
+//        return employeeRequest;
+//    }
+//
+//    public void setEmployeeRequest(EmployeeRequest employeeRequest) {
+//        this.employeeRequest = employeeRequest;
+//    }
 
     public LocationRequest getLocationRequest() {
         return locationRequest;

@@ -79,7 +79,7 @@
                                         <td th:text="${employee.categoryResponse.name}"></td>
                                         <td th:text="${employee.locationResponse.name}"></td>
                                         <td th:text="${employee.rating}"></td>
-                                        <td><a href=# class="btn btn-success">Edit</a></td>
+                                        <td><a th:href="@{employees/edit/{id}(id=${employee.id})}" class="btn btn-success">Edit</a></td>
                                         <td><a href=# class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>

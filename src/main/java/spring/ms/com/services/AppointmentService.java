@@ -58,8 +58,8 @@ public class AppointmentService {
                 toAppointmentEntity(appointmentRequest);
 
 
-        EmployeeRequest employeeRequest = appointmentRequest.getEmployeeRequest();
-        Optional<Employee> employee;
+//        EmployeeRequest employeeRequest = appointmentRequest.getEmployeeRequest();
+//        Optional<Employee> employee;
 
         LocationRequest locationRequest = appointmentRequest.getLocationRequest();
         Optional<Location> location;
@@ -82,18 +82,18 @@ public class AppointmentService {
             location = locationRepository.findByName(locationRequest.getName());
         }
 
-        if (employeeRepository.findByName
-                (appointmentRequest.getEmployeeRequest().getFirstName(),
-                        appointmentRequest.getEmployeeRequest().getLastName()).isEmpty()) {
-            int id = employeeService.createEmployee(employeeRequest);
-            employee = employeeService.getById(id).map(EmployeeTransformer::toEmployeeEntity);
-        } else
-        {
-            employee = employeeRepository.findByName(employeeRequest.getFirstName(), employeeRequest.getLastName());
-        }
+//        if (employeeRepository.findByName
+//                (appointmentRequest.getEmployeeRequest().getFirstName(),
+//                        appointmentRequest.getEmployeeRequest().getLastName()).isEmpty()) {
+//            int id = employeeService.createEmployee(employeeRequest);
+//            employee = employeeService.getById(id).map(EmployeeTransformer::toEmployeeEntity);
+//        } else
+//        {
+//            employee = employeeRepository.findByName(employeeRequest.getFirstName(), employeeRequest.getLastName());
+//        }
 
         appointment.setAppointmentLocation(location.get());
-        appointment.setAppointmentEmployee(employee.get());
+        appointment.setAppointmentEmployee(null);
         appointment.setService(service.get());
 
         return appointmentRepository.save(appointment).getId();

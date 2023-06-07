@@ -23,14 +23,14 @@ public class AppointmentTransformer {
         appointmentResponse.setDateAppointed(DATE_TIME_FORMATTER.format(appointment.getDateAppointed()));
         appointmentResponse.setDescription(appointment.getDescription());
 
-        EmployeeResponse employeeResponse = EmployeeTransformer.
-                toEmployeeResponse(appointment.getAppointmentEmployee());
+//        EmployeeResponse employeeResponse = EmployeeTransformer.
+//                toEmployeeResponse(appointment.getAppointmentEmployee());
         LocationResponse locationResponse = LocationTransformer.
                 toLocationResponse(appointment.getAppointmentLocation());
         ServiceResponse serviceResponse = ServiceTransformer.
                 toServiceResponse(appointment.getService());
 
-        appointmentResponse.setEmployeeResponse(employeeResponse);
+        //appointmentResponse.setEmployeeResponse(employeeResponse);
         appointmentResponse.setLocationResponse(locationResponse);
         appointmentResponse.setServiceResponse(serviceResponse);
 

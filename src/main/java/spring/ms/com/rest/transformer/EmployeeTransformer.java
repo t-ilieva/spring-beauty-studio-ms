@@ -1,6 +1,8 @@
 package spring.ms.com.rest.transformer;
 
+import spring.ms.com.data.entity.Category;
 import spring.ms.com.data.entity.Employee;
+import spring.ms.com.data.entity.Location;
 import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.EmployeeResponse;
@@ -34,8 +36,13 @@ public class EmployeeTransformer {
     }
 
 
-    public static Employee toEmployeeEntity(EmployeeRequest employeeRequest) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(employeeRequest.getDateEmployed());
+    public static Employee toEmployeeEntity(EmployeeRequest employeeRequest) {
+        Date date = null;
+        try {
+            date = DATE_TIME_FORMATTER.parse(employeeRequest.getDateEmployed());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Employee employee = new Employee();
         employee.setFirstName(employeeRequest.getFirstName());
         employee.setLastName(employeeRequest.getLastName());
@@ -53,11 +60,18 @@ public class EmployeeTransformer {
             throw new RuntimeException(e);
         }
         Employee employee = new Employee();
+//        Category category = CategoryTransformer
+//                .toCategoryEntity(employeeResponse.getCategoryResponse());
+//        Location location = LocationTransformer
+//                .toLocationEntity(employeeResponse.getLocationResponse());
+
         employee.setId(employeeResponse.getId());
         employee.setFirstName(employeeResponse.getFirstName());
         employee.setLastName(employeeResponse.getLastName());
         employee.setDateEmployed(date);
         employee.setRating(employeeResponse.getRating());
+//        employee.setEmployeeCategory(category);
+//        employee.setEmployeeLocation(location);
 
         return employee;
     }

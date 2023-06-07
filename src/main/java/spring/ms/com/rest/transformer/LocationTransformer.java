@@ -24,8 +24,13 @@ public class LocationTransformer {
     }
 
 
-    public static Location toLocationEntity(LocationRequest locationRequest) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(locationRequest.getDateOpened());
+    public static Location toLocationEntity(LocationRequest locationRequest) {
+        Date date = null;
+        try {
+            date = DATE_TIME_FORMATTER.parse(locationRequest.getDateOpened());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Location location = new Location();
         location.setName(locationRequest.getName());
         location.setAddress(locationRequest.getAddress());

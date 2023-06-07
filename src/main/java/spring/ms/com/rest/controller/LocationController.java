@@ -3,12 +3,10 @@ package spring.ms.com.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.CategoryRequest;
+import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.LocationResponse;
@@ -18,12 +16,13 @@ import java.text.ParseException;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("locations")
 public class LocationController {
 
     @Autowired
     private LocationService locationService;
 
-    @GetMapping("/locations")
+    @GetMapping("")
     public String getAll(Model model){
         model.addAttribute("title", "Locations");
         model.addAttribute("locations", locationService.getAll());
@@ -31,7 +30,7 @@ public class LocationController {
         return "locations";
     }
 
-    @GetMapping("/addLocation")
+    @GetMapping("/add")
     public String create(Model model){
         LocationRequest locationRequest = new LocationRequest();
         model.addAttribute("title", "Add Location");
@@ -40,7 +39,7 @@ public class LocationController {
         return "add_location";
     }
 
-    @PostMapping("/addLocation")
+    @PostMapping("/add")
     public String save(@ModelAttribute("locationRequest") LocationRequest locationRequest,
                        RedirectAttributes redirectAttributes) throws ParseException {
         int id = locationService.createLocation(locationRequest);
@@ -51,6 +50,29 @@ public class LocationController {
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");
         }
-        return "redirect:/addLocation";
+        return "redirect:/locations/add";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editLocation(@PathVariable int id, Model model){
+        model.addAttribute("title", "Update Location");
+        model.addAttribute("location", locationService.getById(id).get());
+        return "edit_location";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateLocation(@PathVariable int id,
+                                 @ModelAttribute("location") LocationRequest locationRequest,
+                                 RedirectAttributes redirectAttributes, Model model){
+
+        int newId = locationService.editLocation(id, locationRequest);
+        Optional<LocationResponse> location = locationService.getById(id);
+        if(location.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected location!");
+        }
+        else{
+            redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
+        }
+        return "redirect:/locations/edit/{id}";
     }
 }

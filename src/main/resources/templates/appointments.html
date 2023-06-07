@@ -81,7 +81,7 @@
                     <td th:text= "${appointment.employeeResponse.firstName} + ' ' + ${appointment.employeeResponse.lastName}"></td>
                     <td th:text="${appointment.locationResponse.name}"></td>
                     <td th:text="${appointment.serviceResponse.price}"></td>
-                    <td><a href=# class="btn btn-success">Edit</a></td>
+                    <td><a th:href="@{appointments/edit/{id}(id=${appointment.id})}" class="btn btn-success">Edit</a></td>
                     <td><a href=# class="btn btn-danger">Delete</a></td>
                   </tr>
                   </tbody>

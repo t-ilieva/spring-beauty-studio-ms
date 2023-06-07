@@ -1,12 +1,15 @@
 package spring.ms.com.services;
 
 import org.springframework.stereotype.Service;
+import spring.ms.com.data.entity.Employee;
 import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.repository.LocationRepository;
+import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.transformer.CategoryTransformer;
+import spring.ms.com.rest.transformer.EmployeeTransformer;
 import spring.ms.com.rest.transformer.LocationTransformer;
 
 import java.text.ParseException;
@@ -46,6 +49,13 @@ public class LocationService {
     public int createLocation(LocationRequest locationRequest) throws ParseException {
         Location location = LocationTransformer
                 .toLocationEntity(locationRequest);
+        return locationRepository.save(location).getId();
+    }
+
+    public int editLocation(int id, LocationRequest locationRequest){
+        Location location = LocationTransformer
+                .toLocationEntity(locationRequest);
+        location.setId(id);
         return locationRepository.save(location).getId();
     }
 

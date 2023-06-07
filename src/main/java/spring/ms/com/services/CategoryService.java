@@ -1,6 +1,9 @@
 package spring.ms.com.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import spring.ms.com.data.entity.Category;
 import spring.ms.com.data.repository.CategoryRepository;
 import spring.ms.com.rest.request.CategoryRequest;
@@ -43,6 +46,12 @@ public class CategoryService {
     public int createCategory(CategoryRequest categoryRequest){
         Category category = CategoryTransformer
                 .toCategoryEntity(categoryRequest);
+        return categoryRepository.save(category).getId();
+    }
+    public int editCategory(int id, CategoryRequest categoryRequest){
+        Category category = CategoryTransformer
+                .toCategoryEntity(categoryRequest);
+        category.setId(id);
         return categoryRepository.save(category).getId();
     }
 

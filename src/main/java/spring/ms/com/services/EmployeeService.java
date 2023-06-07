@@ -10,7 +10,9 @@ import spring.ms.com.data.repository.LocationRepository;
 import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.request.LocationRequest;
+import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.EmployeeResponse;
+import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.transformer.CategoryTransformer;
 import spring.ms.com.rest.transformer.EmployeeTransformer;
 import spring.ms.com.rest.transformer.LocationTransformer;
@@ -85,6 +87,33 @@ public class EmployeeService {
 
         employee.setEmployeeLocation(location.get());
         employee.setEmployeeCategory(category.get());
+        return employeeRepository.save(employee).getId();
+    }
+
+//    public int editEmployee(int id, Employee employee){
+//        employee.setId(id);
+//
+//        return employeeRepository.save(employee).getId();
+//    }
+//    public void deleteEmployee(int id){
+//        employeeRepository.deleteById(id);
+//    }
+
+    public int editEmployee(int id, EmployeeResponse employeeResponse){
+
+        CategoryResponse categoryResponse = employeeResponse.getCategoryResponse();
+        LocationResponse locationResponse = employeeResponse.getLocationResponse();
+        Employee employee = EmployeeTransformer.toEmployeeEntity(employeeResponse);
+//        Optional<Category> category;
+//        Optional<Location> location;
+
+        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
+        Location location = locationRepository.findByName(locationResponse.getName()).get();
+
+        employee.setEmployeeCategory(category);
+        employee.setEmployeeLocation(location);
+        employee.setId(id);
+
         return employeeRepository.save(employee).getId();
     }
     public void deleteEmployee(int id){

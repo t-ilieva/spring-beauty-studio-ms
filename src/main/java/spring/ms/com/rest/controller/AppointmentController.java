@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/appointments")
 public class AppointmentController {
 
     @Autowired
@@ -32,7 +33,7 @@ public class AppointmentController {
     @Autowired
     private ServiceService serviceService;
 
-    @GetMapping("/appointments")
+    @GetMapping("")
     public String getAll(Model model){
         model.addAttribute("title", "Appointments");
         model.addAttribute("appointments", appointmentService.getAll());
@@ -40,7 +41,7 @@ public class AppointmentController {
         return "appointments";
     }
 
-    @GetMapping("/addAppointment")
+    @GetMapping("/add")
     public String create(Model model){
         AppointmentRequest appointmentRequest = new AppointmentRequest();
         List<LocationResponse> locations = locationService.getAll();
@@ -50,11 +51,11 @@ public class AppointmentController {
         model.addAttribute("appointmentRequest", appointmentRequest);
         model.addAttribute("services", services);
         model.addAttribute("locations", locations);
-        model.addAttribute("employees", employees);
+        //model.addAttribute("employees", employees);
         return "add_appointment";
     }
 
-    @PostMapping("/addAppointment")
+    @PostMapping("/add")
     public String save(@ModelAttribute("appointmentRequest") AppointmentRequest appointmentRequest,
                        RedirectAttributes redirectAttributes) throws ParseException {
         int id = appointmentService.createAppointment(appointmentRequest);
@@ -65,6 +66,6 @@ public class AppointmentController {
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");
         }
-        return "redirect:/addAppointment";
+        return "redirect:/appointments/add";
     }
 }

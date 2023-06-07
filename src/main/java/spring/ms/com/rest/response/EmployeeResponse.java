@@ -1,7 +1,5 @@
 package spring.ms.com.rest.response;
 
-import jakarta.persistence.*;
-
 public class EmployeeResponse {
 
 
