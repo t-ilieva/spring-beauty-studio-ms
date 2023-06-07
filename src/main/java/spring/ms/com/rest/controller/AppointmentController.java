@@ -33,6 +33,7 @@ public class AppointmentController {
     public String getAll(Model model){
         model.addAttribute("title", "Appointments");
         model.addAttribute("appointments", appointmentService.getAll());
+        model.addAttribute("appointment", "");
 
         return "appointments";
     }
@@ -162,5 +163,35 @@ public class AppointmentController {
     public String delete(@PathVariable int id) {
         appointmentService.deleteAppointment(id);
         return "redirect:/appointments";
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("appointment") String appointment, Model model){
+
+        List<AppointmentResponse> appointments = appointmentService.getAll();
+        List<AppointmentResponse> appointmentSearch = new ArrayList<>();
+
+        for (AppointmentResponse appointmentResponse : appointments) {
+            String client = appointmentResponse.getClientName().toLowerCase();
+            String location = appointmentResponse.getServiceResponse().getName().toLowerCase();
+            if(client.contains(appointment.toLowerCase()) || location.contains(appointment.toLowerCase())){
+                appointmentSearch.add(appointmentResponse);
+            }
+        }
+
+        model.addAttribute("appointment", "");
+        model.addAttribute("appointmentSearch", appointmentSearch);
+
+        return "search_appointments";
+    }
+
+    @PostMapping("/search")
+    public String Search(Model model,
+                         @ModelAttribute("appointment") String appointment,
+                         RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("appointment", appointment);
+
+        return "redirect:/appointments/search";
     }
 }

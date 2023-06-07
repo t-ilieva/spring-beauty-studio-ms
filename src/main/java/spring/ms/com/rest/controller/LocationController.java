@@ -5,11 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import spring.ms.com.data.entity.Location;
 import spring.ms.com.rest.request.LocationRequest;
+import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.services.LocationService;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +27,7 @@ public class LocationController {
     public String getAll(Model model){
         model.addAttribute("title", "Locations");
         model.addAttribute("locations", locationService.getAll());
+        model.addAttribute("location", "");
 
         return "locations";
     }
@@ -86,5 +91,33 @@ public class LocationController {
     public String deleteLocation(@PathVariable int id) {
         locationService.deleteLocation(id);
         return "redirect:/locations";
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("location") String location, Model model){
+
+        List<LocationResponse> locations = locationService.getAll();
+        List<LocationResponse> locationSearch = new ArrayList<>();
+
+        for (LocationResponse locationResponse : locations) {
+            if(locationResponse.getAddress().toLowerCase().contains(location.toLowerCase())){
+                locationSearch.add(locationResponse);
+            }
+        }
+
+        model.addAttribute("location", "");
+        model.addAttribute("locationSearch", locationSearch);
+
+        return "search_locations";
+    }
+
+    @PostMapping("/search")
+    public String Search(Model model,
+                         @ModelAttribute("location") String location,
+                         RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("location", location);
+
+        return "redirect:/locations/search";
     }
 }

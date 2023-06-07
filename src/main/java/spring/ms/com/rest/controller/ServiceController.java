@@ -12,6 +12,7 @@ import spring.ms.com.services.CategoryService;
 import spring.ms.com.services.ServiceService;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class ServiceController {
     public String getAll(Model model){
         model.addAttribute("title", "Services");
         model.addAttribute("services", serviceService.getAll());
+        model.addAttribute("service", "");
 
         return "services";
     }
@@ -94,5 +96,33 @@ public class ServiceController {
     public String delete(@PathVariable int id) {
         serviceService.deleteService(id);
         return "redirect:/services";
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("category") String category, Model model){
+
+        List<CategoryResponse> categories = categoryService.getAll();
+        List<CategoryResponse> categorySearch = new ArrayList<>();
+
+        for (CategoryResponse categoryResponse : categories) {
+            if(categoryResponse.getName().toLowerCase().startsWith(category.toLowerCase())){
+                categorySearch.add(categoryResponse);
+            }
+        }
+
+        model.addAttribute("category", "");
+        model.addAttribute("categorySearch", categorySearch);
+
+        return "search_categories";
+    }
+
+    @PostMapping("/search")
+    public String Search(Model model,
+                         @ModelAttribute("category") String category,
+                         RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("category", category);
+
+        return "redirect:/categories/search";
     }
 }

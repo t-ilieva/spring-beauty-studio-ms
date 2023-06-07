@@ -3,7 +3,6 @@ package spring.ms.com.services;
 import spring.ms.com.data.entity.Appointment;
 import spring.ms.com.data.entity.Employee;
 import spring.ms.com.data.entity.Service;
-import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.repository.AppointmentRepository;
 import spring.ms.com.data.repository.EmployeeRepository;
 import spring.ms.com.data.repository.LocationRepository;
@@ -12,7 +11,6 @@ import spring.ms.com.rest.request.*;
 import spring.ms.com.rest.response.*;
 import spring.ms.com.rest.transformer.*;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

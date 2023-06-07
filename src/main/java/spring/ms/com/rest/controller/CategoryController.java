@@ -9,6 +9,9 @@ import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.services.CategoryService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -19,9 +22,11 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("")
-    public String getAll(Model model){
+    public String getAll(Model model, RedirectAttributes redirectAttributes){
         model.addAttribute("title", "Categories");
         model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute("category", "");
+
 
         return "categories";
     }
@@ -86,5 +91,34 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return "redirect:/categories";
     }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("category") String category, Model model){
+
+        List<CategoryResponse> categories = categoryService.getAll();
+        List<CategoryResponse> categorySearch = new ArrayList<>();
+
+        for (CategoryResponse categoryResponse : categories) {
+            if(categoryResponse.getName().toLowerCase().startsWith(category.toLowerCase())){
+                categorySearch.add(categoryResponse);
+            }
+        }
+
+        model.addAttribute("category", "");
+        model.addAttribute("categorySearch", categorySearch);
+
+        return "search_categories";
+    }
+
+    @PostMapping("/search")
+    public String Search(Model model,
+                         @ModelAttribute("category") String category,
+                         RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("category", category);
+
+        return "redirect:/categories/search";
+    }
+
 }
 

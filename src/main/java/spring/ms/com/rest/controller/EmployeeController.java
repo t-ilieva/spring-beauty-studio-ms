@@ -14,6 +14,7 @@ import spring.ms.com.services.EmployeeService;
 import spring.ms.com.services.LocationService;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class EmployeeController {
     public String getAll(Model model){
         model.addAttribute("title", "Employees");
         model.addAttribute("employees", employeeService.getAll());
+        model.addAttribute("employee", "");
 
         return "employees";
     }
@@ -104,5 +106,34 @@ public class EmployeeController {
     public String delete(@PathVariable int id) {
         employeeService.deleteEmployee(id);
         return "redirect:/employees";
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("employee") String employee, Model model){
+
+        List<EmployeeResponse> employees = employeeService.getAll();
+        List<EmployeeResponse> employeeSearch = new ArrayList<>();
+
+        for (EmployeeResponse employeeResponse : employees) {
+            String name = employeeResponse.getFirstName() + " " + employeeResponse.getLastName();
+            if(name.toLowerCase().contains(employee.toLowerCase())){
+                employeeSearch.add(employeeResponse);
+            }
+        }
+
+        model.addAttribute("employee", "");
+        model.addAttribute("employeeSearch", employeeSearch);
+
+        return "search_employees";
+    }
+
+    @PostMapping("/search")
+    public String Search(Model model,
+                         @ModelAttribute("employee") String employee,
+                         RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("employee", employee);
+
+        return "redirect:/employees/search";
     }
 }
