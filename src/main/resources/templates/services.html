@@ -78,7 +78,7 @@
                                         <td th:text="${service.description}"></td>
                                         <td th:text="${service.price} + ' lv'"></td>
                                         <td><a th:href="@{services/edit/{id}(id=${service.id})}" class="btn btn-success">Edit</a></td>
-                                        <td><a href=# class="btn btn-danger">Delete</a></td>
+                                        <td><a th:href="@{services/delete/{id}(id=${service.id})}" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

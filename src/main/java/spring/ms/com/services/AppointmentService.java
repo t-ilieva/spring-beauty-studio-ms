@@ -1,14 +1,14 @@
 package spring.ms.com.services;
 
-import org.springframework.stereotype.Service;
 import spring.ms.com.data.entity.Appointment;
+import spring.ms.com.data.entity.Service;
 import spring.ms.com.data.entity.Location;
 import spring.ms.com.data.repository.AppointmentRepository;
 import spring.ms.com.data.repository.EmployeeRepository;
 import spring.ms.com.data.repository.LocationRepository;
 import spring.ms.com.data.repository.ServiceRepository;
 import spring.ms.com.rest.request.*;
-import spring.ms.com.rest.response.AppointmentResponse;
+import spring.ms.com.rest.response.*;
 import spring.ms.com.rest.transformer.*;
 
 import java.text.ParseException;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@org.springframework.stereotype.Service
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
@@ -64,7 +64,7 @@ public class AppointmentService {
         Optional<Location> location;
 
         ServiceRequest serviceRequest = appointmentRequest.getServiceRequest();
-        Optional<spring.ms.com.data.entity.Service> service;
+        Optional<Service> service;
 
         if (serviceRepository.findByName(serviceRequest.getName()).isEmpty()) {
             int id = serviceService.createService(serviceRequest);
@@ -94,6 +94,23 @@ public class AppointmentService {
         appointment.setAppointmentLocation(location.get());
         appointment.setAppointmentEmployee(null);
         appointment.setService(service.get());
+
+        return appointmentRepository.save(appointment).getId();
+    }
+
+    public int editAppointment(int id, AppointmentResponse appointmentResponse){
+        Appointment appointment = AppointmentTransformer
+                .toAppointmentEntity(appointmentResponse);
+
+        ServiceResponse serviceResponse = appointmentResponse.getServiceResponse();
+        LocationResponse locationResponse = appointmentResponse.getLocationResponse();
+
+        Service service = serviceRepository.findByName(serviceResponse.getName()).get();
+        Location location = locationRepository.findByName(locationResponse.getName()).get();
+
+        appointment.setAppointmentLocation(location);
+        appointment.setService(service);
+        appointment.setId(id);
 
         return appointmentRepository.save(appointment).getId();
     }

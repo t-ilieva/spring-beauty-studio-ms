@@ -93,7 +93,7 @@ public class EmployeeController {
 
     @GetMapping("/delete/{id}")
     public String deleteLocation(@PathVariable int id, Model model){
-        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("title", ("Delete Employee | ID:" + id));
         model.addAttribute("text", "employee");
         model.addAttribute("type", "employees");
         model.addAttribute("item", employeeService.getById(id).get());

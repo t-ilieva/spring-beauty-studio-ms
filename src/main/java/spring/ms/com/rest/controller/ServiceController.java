@@ -83,7 +83,7 @@ public class ServiceController {
 
     @GetMapping("/delete/{id}")
     public String deleteLocation(@PathVariable int id, Model model){
-        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("title", ("Delete Service | ID:" + id));
         model.addAttribute("text", "service");
         model.addAttribute("type", "services");
         model.addAttribute("item", serviceService.getById(id).get());

@@ -46,8 +46,13 @@ public class AppointmentTransformer {
         return appointment;
     }
 
-    public static Appointment toAppointmentEntity(AppointmentResponse appointmentResponse) throws ParseException {
-        Date date = DATE_TIME_FORMATTER.parse(appointmentResponse.getDateAppointed());
+    public static Appointment toAppointmentEntity(AppointmentResponse appointmentResponse) {
+        Date date = null;
+        try {
+            date = DATE_TIME_FORMATTER.parse(appointmentResponse.getDateAppointed());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Appointment appointment = new Appointment();
         appointment.setId(appointmentResponse.getId());
         appointment.setClientName(appointmentResponse.getClientName());

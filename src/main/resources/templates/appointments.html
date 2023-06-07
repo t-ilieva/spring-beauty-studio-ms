@@ -82,7 +82,7 @@
                     <td th:text="${appointment.locationResponse.name}"></td>
                     <td th:text="${appointment.serviceResponse.price}"></td>
                     <td><a th:href="@{appointments/edit/{id}(id=${appointment.id})}" class="btn btn-success">Edit</a></td>
-                    <td><a href=# class="btn btn-danger">Delete</a></td>
+                    <td><a th:href="@{appointments/delete/{id}(id=${appointment.id})}" class="btn btn-danger">Delete</a></td>
                   </tr>
                   </tbody>
                 </table>

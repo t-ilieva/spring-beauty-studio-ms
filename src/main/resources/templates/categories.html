@@ -70,7 +70,7 @@
                                         <td th:text="${category.id}"></td>
                                         <td th:text="${category.name}"></td>
                                         <td><a th:href="@{categories/edit/{id}(id=${category.id})}" class="btn btn-success">Edit</a></td>
-                                        <td><a href=# class="btn btn-danger">Delete</a></td>
+                                        <td><a th:href="@{categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

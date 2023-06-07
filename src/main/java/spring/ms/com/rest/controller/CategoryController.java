@@ -74,7 +74,7 @@ public class CategoryController {
 
     @GetMapping("/delete/{id}")
     public String deleteLocation(@PathVariable int id, Model model){
-        model.addAttribute("title", ("Delete Location | ID:" + id));
+        model.addAttribute("title", ("Delete Category | ID:" + id));
         model.addAttribute("text", "category");
         model.addAttribute("type", "categories");
         model.addAttribute("item", categoryService.getById(id).get());

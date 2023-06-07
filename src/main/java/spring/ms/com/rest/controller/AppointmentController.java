@@ -65,6 +65,35 @@ public class AppointmentController {
         return "redirect:/appointments/add";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editServices(@PathVariable int id, Model model){
+        List<LocationResponse> locations = locationService.getAll();
+        List<ServiceResponse> services = serviceService.getAll();
+        List<EmployeeResponse> employees = employeeService.getAll();
+        model.addAttribute("title", ("Update Appointment | ID: " + id));
+        model.addAttribute("appointment", appointmentService.getById(id).get());
+        model.addAttribute("services", services);
+        model.addAttribute("locations", locations);
+        //model.addAttribute("employees", employees);
+        return "edit_appointment";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateService(@PathVariable int id,
+                                @ModelAttribute("appointment") AppointmentResponse appointmentResponse,
+                                RedirectAttributes redirectAttributes, Model model){
+
+        int newId = appointmentService.editAppointment(id, appointmentResponse);
+        Optional<AppointmentResponse> appointment = appointmentService.getById(id);
+        if(appointment.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected service!");
+        }
+        else{
+            redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
+        }
+        return "redirect:/appointments/edit/{id}";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteLocation(@PathVariable int id, Model model){
         model.addAttribute("title", ("Delete Location | ID:" + id));
