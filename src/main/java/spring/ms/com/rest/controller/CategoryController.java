@@ -46,7 +46,7 @@ public class CategoryController {
         int id = categoryService.createCategory(categoryRequest);
         Optional<CategoryResponse> category = categoryService.getById(id);
         if(category.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding a category!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding! Check if category already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");

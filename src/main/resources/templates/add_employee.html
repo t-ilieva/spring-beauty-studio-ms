@@ -79,8 +79,8 @@
 <!--                                    </div>-->
                                     <div class="form-group">
                                         <label>Location</label>
-                                        <select th:field="*{locationRequest.name}" th:class="form-control">
-                                            <option th:each="location : ${locations}" th:value="${location.name}" th:text="${location.name}">
+                                        <select th:field="*{locationRequest.address}" th:class="form-control">
+                                            <option th:each="location : ${locations}" th:value="${location.address}" th:text="${location.name} + ' - ' + ${location.address}">
                                             </option>
                                         </select>
                                     </div>

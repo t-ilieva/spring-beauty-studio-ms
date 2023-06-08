@@ -45,7 +45,7 @@ public class LocationController {
         int id = locationService.createLocation(locationRequest);
         Optional<LocationResponse> location = locationService.getById(id);
         if(location.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding a location!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding! Check if location with the same address already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");

@@ -35,7 +35,9 @@ public class EmployeeTransformer {
 
             employeeResponse.setLocationResponse(locationResponse);
         } else {
-            employeeResponse.setLocationResponse(new LocationResponse());
+            LocationResponse locationResponse = new LocationResponse();
+            locationResponse.setAddress("");
+            employeeResponse.setLocationResponse(locationResponse);
         }
 
 //        employeeResponse.setCategoryResponse(categoryResponse);

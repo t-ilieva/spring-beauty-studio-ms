@@ -62,14 +62,9 @@ public class EmployeeService {
     }
 
     public int createEmployee(EmployeeRequest employeeRequest) {
-        Employee employee = EmployeeTransformer
-                .toEmployeeEntity(employeeRequest);
 
 //        CategoryRequest categoryRequest = employeeRequest.getCategoryRequest();
 //        Optional<Category> category;
-
-        LocationRequest locationRequest = employeeRequest.getLocationRequest();
-        Optional<Location> location;
 
 //        if (categoryRepository.findByName(categoryRequest.getName()).isEmpty()) {
 //            int id = categoryService.createCategory(categoryRequest);
@@ -77,19 +72,27 @@ public class EmployeeService {
 //        } else {
 //            category = categoryRepository.findByName(categoryRequest.getName());
 //        }
+//        employee.setEmployeeCategory(category.get());
 
-        if (locationRepository.findByName(locationRequest.getName()).isEmpty()) {
+        LocationRequest locationRequest = employeeRequest.getLocationRequest();
+        Optional<Location> location;
+
+        if (locationRepository.findByAddress(locationRequest.getAddress()).isEmpty()) {
             int id = locationService.createLocation(locationRequest);
             location = locationService.getById(id).map(LocationTransformer::toLocationEntity);
         } else
         {
-            location = locationRepository.findByName(locationRequest.getName());
+            location = locationRepository.findByAddress(locationRequest.getAddress());
         }
 
-
-        employee.setEmployeeLocation(location.get());
-//        employee.setEmployeeCategory(category.get());
-        return employeeRepository.save(employee).getId();
+        if(employeeRepository.findByEmployeeNumber(employeeRequest.getEmployeeNumber()).isEmpty()){
+            Employee employee = EmployeeTransformer
+                    .toEmployeeEntity(employeeRequest);
+            employee.setEmployeeLocation(location.get());
+            return employeeRepository.save(employee).getId();
+        }else{
+            return -1;
+        }
     }
 
     public int editEmployee(int id, EmployeeResponse employeeResponse){
@@ -100,7 +103,7 @@ public class EmployeeService {
         LocationResponse locationResponse = employeeResponse.getLocationResponse();
 
 //        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
-        Location location = locationRepository.findByName(locationResponse.getName()).get();
+        Location location = locationRepository.findByAddress(locationResponse.getAddress()).get();
 
 //        employee.setEmployeeCategory(category);
         employee.setEmployeeLocation(location);

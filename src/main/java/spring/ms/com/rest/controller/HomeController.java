@@ -34,6 +34,12 @@ public class HomeController {
         return "page_login";
     }
 
+    @GetMapping("logout")
+    public String logout()
+    {
+        return "redirect:/login";
+    }
+
     @GetMapping("home")
     public String home(Model model)
     {

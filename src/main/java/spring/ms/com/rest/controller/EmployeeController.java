@@ -57,7 +57,7 @@ public class EmployeeController {
         int id = employeeService.createEmployee(employeeRequest);
         Optional<EmployeeResponse> employee = employeeService.getById(id);
         if(employee.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding an employee!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding! Check if employee with the same employee number already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");

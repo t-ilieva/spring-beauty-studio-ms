@@ -42,9 +42,13 @@ public class LocationService {
     }
 
     public int createLocation(LocationRequest locationRequest) {
-        Location location = LocationTransformer
-                .toLocationEntity(locationRequest);
-        return locationRepository.save(location).getId();
+        if(locationRepository.findByAddress(locationRequest.getAddress()).isEmpty()){
+            Location location = LocationTransformer
+                    .toLocationEntity(locationRequest);
+            return locationRepository.save(location).getId();
+        }else{
+            return -1;
+        }
     }
 
     public int editLocation(int id, LocationRequest locationRequest){

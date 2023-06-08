@@ -63,9 +63,10 @@ public class AppointmentController {
         List<ServiceResponse> services = serviceService.getAll();
         List<EmployeeResponse> allEmployees = employeeService.getAll();
         List<EmployeeResponse> employees = new ArrayList<>();
+        String address = locationResponse.getAddress();
 
         for (EmployeeResponse e: allEmployees) {
-            if (e.getLocationResponse().getName().equals(locationResponse.getName())){
+            if (!e.getLocationResponse().getAddress().isBlank() && e.getLocationResponse().getAddress().equals(address) ){
                 employees.add(e);
             }
         }
@@ -122,8 +123,10 @@ public class AppointmentController {
         List<EmployeeResponse> allEmployees = employeeService.getAll();
         List<EmployeeResponse> employees = new ArrayList<>();
 
+        String address = locationResponse.getAddress();
+
         for (EmployeeResponse e: allEmployees) {
-            if (e.getLocationResponse().getName().equals(locationResponse.getName())) {
+            if (!e.getLocationResponse().getAddress().isBlank() && e.getLocationResponse().getAddress().equals(address)) {
                 employees.add(e);
             }
         }

@@ -41,9 +41,13 @@ public class CategoryService {
     }
 
     public int createCategory(CategoryRequest categoryRequest){
-        Category category = CategoryTransformer
-                .toCategoryEntity(categoryRequest);
-        return categoryRepository.save(category).getId();
+        if(categoryRepository.findByName(categoryRequest.getName()).isEmpty()){
+            Category category = CategoryTransformer
+                    .toCategoryEntity(categoryRequest);
+            return categoryRepository.save(category).getId();
+        }else {
+            return -1;
+        }
     }
     public int editCategory(int id, CategoryRequest categoryRequest){
         Category category = CategoryTransformer
