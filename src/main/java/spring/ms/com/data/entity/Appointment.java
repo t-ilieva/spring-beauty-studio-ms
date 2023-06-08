@@ -19,11 +19,11 @@ public class Appointment {
 
 
     @ManyToOne
-    @JoinColumn(name = "service_id")
+    @JoinColumn(nullable = true, name = "service_id")
     private Service service;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(nullable = true, name = "employee_id")
     private Employee appointmentEmployee;
 
 //    @ManyToOne

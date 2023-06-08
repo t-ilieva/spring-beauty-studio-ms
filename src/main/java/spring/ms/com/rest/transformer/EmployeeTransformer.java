@@ -7,6 +7,7 @@ import spring.ms.com.rest.request.EmployeeRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.EmployeeResponse;
 import spring.ms.com.rest.response.LocationResponse;
+import spring.ms.com.rest.response.ServiceResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,11 +28,17 @@ public class EmployeeTransformer {
 
 //        CategoryResponse categoryResponse = CategoryTransformer.
 //                toCategoryResponse(employee.getEmployeeCategory());
-        LocationResponse locationResponse = LocationTransformer.
-                toLocationResponse(employee.getEmployeeLocation());
+
+        if(employee.getEmployeeLocation() != null) {
+            LocationResponse locationResponse = LocationTransformer.
+                    toLocationResponse(employee.getEmployeeLocation());
+
+            employeeResponse.setLocationResponse(locationResponse);
+        } else {
+            employeeResponse.setLocationResponse(new LocationResponse());
+        }
 
 //        employeeResponse.setCategoryResponse(categoryResponse);
-        employeeResponse.setLocationResponse(locationResponse);
 
         return employeeResponse;
     }

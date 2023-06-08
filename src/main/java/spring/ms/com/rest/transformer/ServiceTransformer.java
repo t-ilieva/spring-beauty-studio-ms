@@ -3,6 +3,7 @@ package spring.ms.com.rest.transformer;
 import spring.ms.com.data.entity.Service;
 import spring.ms.com.rest.request.ServiceRequest;
 import spring.ms.com.rest.response.CategoryResponse;
+import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 
 public class ServiceTransformer {
@@ -15,8 +16,14 @@ public class ServiceTransformer {
         serviceResponse.setDuration(service.getDuration());
         serviceResponse.setPrice(service.getPrice());
 
-        CategoryResponse categoryResponse = CategoryTransformer.toCategoryResponse(service.getServiceCategory());
-        serviceResponse.setCategoryResponse(categoryResponse);
+        if(service.getServiceCategory() != null) {
+            CategoryResponse categoryResponse = CategoryTransformer
+                    .toCategoryResponse(service.getServiceCategory());
+
+            serviceResponse.setCategoryResponse(categoryResponse);
+        } else {
+            serviceResponse.setCategoryResponse(new CategoryResponse());
+        }
 
         return serviceResponse;
     }

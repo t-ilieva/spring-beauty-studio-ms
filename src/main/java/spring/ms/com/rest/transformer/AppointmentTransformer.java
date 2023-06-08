@@ -22,16 +22,26 @@ public class AppointmentTransformer {
         appointmentResponse.setDateAppointed(DATE_TIME_FORMATTER.format(appointment.getDateAppointed()));
         appointmentResponse.setDescription(appointment.getDescription());
 
-        EmployeeResponse employeeResponse = EmployeeTransformer.
-                toEmployeeResponse(appointment.getAppointmentEmployee());
-//        LocationResponse locationResponse = LocationTransformer.
-//                toLocationResponse(appointment.getAppointmentLocation());
-        ServiceResponse serviceResponse = ServiceTransformer.
-                toServiceResponse(appointment.getService());
 
-        appointmentResponse.setEmployeeResponse(employeeResponse);
-        //appointmentResponse.setLocationResponse(locationResponse);
-        appointmentResponse.setServiceResponse(serviceResponse);
+        if(appointment.getAppointmentEmployee() != null) {
+            EmployeeResponse employeeResponse = EmployeeTransformer.
+                    toEmployeeResponse(appointment.getAppointmentEmployee());
+            appointmentResponse.setEmployeeResponse(employeeResponse);
+        } else {
+            EmployeeResponse employeeResponse = new EmployeeResponse();
+            employeeResponse.setLocationResponse(new LocationResponse());
+            employeeResponse.setFirstName("");
+            employeeResponse.setLastName("");
+            appointmentResponse.setEmployeeResponse(employeeResponse);
+        }
+
+        if(appointment.getService() != null) {
+            ServiceResponse serviceResponse = ServiceTransformer.
+                    toServiceResponse(appointment.getService());
+            appointmentResponse.setServiceResponse(serviceResponse);
+        } else {
+            appointmentResponse.setServiceResponse(new ServiceResponse());
+        }
 
         return appointmentResponse;
     }
