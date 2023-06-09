@@ -80,9 +80,9 @@ public class LocationController {
                                  RedirectAttributes redirectAttributes, Model model){
 
         int newId = locationService.editLocation(id, locationRequest);
-        Optional<LocationResponse> location = locationService.getById(id);
+        Optional<LocationResponse> location = locationService.getById(newId);
         if(location.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected location!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating! Check if location with the same address already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");

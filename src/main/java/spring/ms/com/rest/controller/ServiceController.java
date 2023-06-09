@@ -64,7 +64,7 @@ public class ServiceController {
         int id = serviceService.createService(serviceRequest);
         Optional<ServiceResponse> service = serviceService.getById(id);
         if(service.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding a service!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding! Check if service with the same name already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Added successfully!");
@@ -87,9 +87,9 @@ public class ServiceController {
                                  RedirectAttributes redirectAttributes, Model model){
 
         int newId = serviceService.editService(id, serviceResponse);
-        Optional<ServiceResponse> service = serviceService.getById(id);
+        Optional<ServiceResponse> service = serviceService.getById(newId);
         if(service.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected service!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating! Check if service with the same name already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");

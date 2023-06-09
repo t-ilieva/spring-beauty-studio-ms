@@ -52,12 +52,19 @@ public class LocationService {
     }
 
     public int editLocation(int id, LocationRequest locationRequest){
-        Location location = LocationTransformer
-                .toLocationEntity(locationRequest);
 
-        location.setId(id);
+        String address = locationRequest.getAddress();
 
-        return locationRepository.save(location).getId();
+        if (locationRepository.findByAddress(locationRequest.getAddress()).isEmpty() ||
+                locationRepository.findById(id).get().getAddress().equals(address)) {
+            Location location = LocationTransformer
+                    .toLocationEntity(locationRequest);
+
+            location.setId(id);
+            return locationRepository.save(location).getId();
+        } else {
+            return -1;
+        }
     }
 
     public void deleteLocation(int id){
