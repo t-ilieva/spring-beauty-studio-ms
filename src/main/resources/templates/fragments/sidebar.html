@@ -14,7 +14,7 @@
         <img th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{ user.username }}</a>
+        <a href="/home" th:text="${user.fullName}" class="d-block"></a>
       </div>
     </div>
 
@@ -28,47 +28,6 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               Home
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/employees" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Employees
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/categories" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Categories
-            </p>
-          </a>
-        </li>
-        </li>
-        <li class="nav-item">
-          <a href="/locations" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Locations
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/services" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Services
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/appointments" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Appointments
             </p>
           </a>
         </li>
@@ -110,6 +69,47 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               Add Appointment
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/employees" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Manage Employees
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/categories" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Manage Categories
+            </p>
+          </a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a href="/locations" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Manage Locations
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/services" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Manage Services
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/appointments" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Manage Appointments
             </p>
           </a>
         </li>
