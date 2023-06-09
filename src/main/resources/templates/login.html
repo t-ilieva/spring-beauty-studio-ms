@@ -29,10 +29,10 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign In</p>
 
-            <form th:action="@{/home}" method="post">
+            <form class="login-form" th:action="@{/login}" action="/login" method="post">
                 <!--{% csrf_token %}-->
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" name="email">
+                    <input type="text" class="form-control" placeholder="username" name="username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="password" name="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -51,18 +51,10 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                 </div>
-                <!--{% if messages %}
                 <div class="col-12">
-                    {% for message in messages %}
-                    {% if message.tags == 'success' %}
-                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
-                    {% endif %}
-                    {% if message.tags == 'error' %}
-                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
-                    {% endif %}
-                    {% endfor %}
+                    <div th:if="${param.error}" class="alert alert-danger" style="margin-top:10px">Invalid email & password</div>
+                    <div th:if="${param.logout}" class="alert alert-success" style="margin-top:10px">Logout successfully</div>
                 </div>
-                {% endif %}
                 <!e-- /.col -->
                 <div class="col-12 text-center">
                     <p class="login-box-msg"><br>Sign Up</p>

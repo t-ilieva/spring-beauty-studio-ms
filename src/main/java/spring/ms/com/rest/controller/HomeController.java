@@ -10,8 +10,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.response.AppointmentResponse;
 import spring.ms.com.security.User;
 import spring.ms.com.security.UserDTO;
+import spring.ms.com.security.UserRepository;
 import spring.ms.com.security.UserService;
 
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -31,20 +33,13 @@ public class HomeController {
     @GetMapping("login")
     public String login()
     {
-        return "page_login";
+        return "login";
     }
 
     @GetMapping("logout")
     public String logout()
     {
         return "redirect:/login";
-    }
-
-    @GetMapping("home")
-    public String home(Model model)
-    {
-        model.addAttribute("title", "Home");
-        return "home_page";
     }
 
     @GetMapping ("signUp")
@@ -66,7 +61,7 @@ public class HomeController {
             int id = userService.create(userDTO);
             Optional<UserDTO> userDTO1 = userService.getById(id);
             if(userDTO1.isEmpty()) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Error creating user!");
+                redirectAttributes.addFlashAttribute("errorMessage", "User with this email already exists!");
             }
             else{
                 redirectAttributes.addFlashAttribute("successMessage", "Created successfully!");
