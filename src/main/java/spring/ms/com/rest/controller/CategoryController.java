@@ -9,6 +9,7 @@ import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.security.User;
 import spring.ms.com.security.UserRepository;
+import spring.ms.com.security.UserService;
 import spring.ms.com.services.CategoryService;
 
 import java.security.Principal;
@@ -24,12 +25,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @ModelAttribute
     private void userDetails(Model model, Principal principal) {
         String email = principal.getName();
-        User user = userRepository.findByEmail(email);
+        User user = userService.getByEmail(email);
 
         model.addAttribute("user", user);
     }

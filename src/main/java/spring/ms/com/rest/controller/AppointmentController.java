@@ -9,6 +9,7 @@ import spring.ms.com.rest.request.AppointmentRequest;
 import spring.ms.com.rest.response.*;
 import spring.ms.com.security.User;
 import spring.ms.com.security.UserRepository;
+import spring.ms.com.security.UserService;
 import spring.ms.com.services.AppointmentService;
 import spring.ms.com.services.EmployeeService;
 import spring.ms.com.services.LocationService;
@@ -33,12 +34,12 @@ public class AppointmentController {
     private ServiceService serviceService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @ModelAttribute
     private void userDetails(Model model, Principal principal) {
         String email = principal.getName();
-        User user = userRepository.findByEmail(email);
+        User user = userService.getByEmail(email);
 
         model.addAttribute("user", user);
     }

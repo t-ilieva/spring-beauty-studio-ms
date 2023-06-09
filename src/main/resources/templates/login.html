@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href=#>Beauty Studio<b>✨MS</b></a>
+        <a href="/login">Beauty Studio<b>✨MS</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -32,7 +32,7 @@
             <form class="login-form" th:action="@{/login}" action="/login" method="post">
                 <!--{% csrf_token %}-->
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="email" name="username">
+                    <input type="text" class="form-control" placeholder="Email" name="username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="password" name="password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

@@ -10,6 +10,7 @@ import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.ServiceResponse;
 import spring.ms.com.security.User;
 import spring.ms.com.security.UserRepository;
+import spring.ms.com.security.UserService;
 import spring.ms.com.services.CategoryService;
 import spring.ms.com.services.ServiceService;
 
@@ -28,12 +29,12 @@ public class ServiceController {
     @Autowired
     private CategoryService categoryService;
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @ModelAttribute
     private void userDetails(Model model, Principal principal) {
         String email = principal.getName();
-        User user = userRepository.findByEmail(email);
+        User user = userService.getByEmail(email);
 
         model.addAttribute("user", user);
     }
