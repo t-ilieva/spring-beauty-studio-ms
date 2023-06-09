@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.CategoryRequest;
 import spring.ms.com.rest.response.CategoryResponse;
+import spring.ms.com.security.User;
+import spring.ms.com.security.UserRepository;
 import spring.ms.com.services.CategoryService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +23,16 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UserRepository userRepository;
+
+    @ModelAttribute
+    private void userDetails(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = userRepository.findByEmail(email);
+
+        model.addAttribute("user", user);
+    }
 
     @GetMapping("")
     public String getAll(Model model, RedirectAttributes redirectAttributes){

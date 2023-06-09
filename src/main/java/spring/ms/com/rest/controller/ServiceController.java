@@ -8,9 +8,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.ServiceRequest;
 import spring.ms.com.rest.response.CategoryResponse;
 import spring.ms.com.rest.response.ServiceResponse;
+import spring.ms.com.security.User;
+import spring.ms.com.security.UserRepository;
 import spring.ms.com.services.CategoryService;
 import spring.ms.com.services.ServiceService;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,16 @@ public class ServiceController {
     private ServiceService serviceService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UserRepository userRepository;
+
+    @ModelAttribute
+    private void userDetails(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = userRepository.findByEmail(email);
+
+        model.addAttribute("user", user);
+    }
 
     @GetMapping("")
     public String getAll(Model model){

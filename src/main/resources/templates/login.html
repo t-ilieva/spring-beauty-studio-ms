@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Beauty Studio Management System | Log in</title>
+    <title>Beauty Studio MS | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,17 +22,17 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href=#><b>Course</b>MS</a>
+        <a href=#>Beauty Studio<b>✨MS</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign In</p>
+            <p class="login-box-msg"><b>Login</b></p>
 
             <form class="login-form" th:action="@{/login}" action="/login" method="post">
                 <!--{% csrf_token %}-->
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="username" name="username">
+                    <input type="text" class="form-control" placeholder="email" name="username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -57,13 +57,13 @@
                 </div>
                 <!e-- /.col -->
                 <div class="col-12 text-center">
-                    <p class="login-box-msg"><br>Sign Up</p>
+                    <p class="login-box-msg"><br>Don't have an account?</p>
                 </div><!-- /.col -->
                 <div class="col-12 text-center">
                     <b>|</b>
-                    <a href=# style="color: red;">Admin</a> <b>|</b>
-                    <a href=# style="color: orange;">Teacher</a> <b>|</b>
-                    <a href=# style="color: cadetblue;">Student</a> <b>|</b>
+<!--                    <a href=# style="color: red;">Admin</a> <b>|</b>-->
+                    <a href="/signUp" style="color: orange;">Sign Up</a> <b>|</b>
+<!--                    <a href=# style="color: cadetblue;">Student</a> <b>|</b>-->
                 </div>
             </form>
 

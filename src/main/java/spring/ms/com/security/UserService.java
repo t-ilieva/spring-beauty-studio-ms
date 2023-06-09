@@ -23,6 +23,11 @@ public class UserService {
                 .map(UserTransformer::toUserDTO);
     }
 
+    public User getByEmail(String email){
+        return userRepository
+                .findByEmail(email);
+    }
+
     public int create(UserDTO userDTO){
         User user = UserTransformer.toUserEntity(userDTO);
 

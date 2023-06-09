@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.ms.com.rest.request.AppointmentRequest;
 import spring.ms.com.rest.response.*;
+import spring.ms.com.security.User;
+import spring.ms.com.security.UserRepository;
 import spring.ms.com.services.AppointmentService;
 import spring.ms.com.services.EmployeeService;
 import spring.ms.com.services.LocationService;
 import spring.ms.com.services.ServiceService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +31,17 @@ public class AppointmentController {
     private LocationService locationService;
     @Autowired
     private ServiceService serviceService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @ModelAttribute
+    private void userDetails(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = userRepository.findByEmail(email);
+
+        model.addAttribute("user", user);
+    }
 
     @GetMapping("")
     public String getAll(Model model){
