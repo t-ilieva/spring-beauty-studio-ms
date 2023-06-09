@@ -50,12 +50,18 @@ public class CategoryService {
         }
     }
     public int editCategory(int id, CategoryRequest categoryRequest){
-        Category category = CategoryTransformer
-                .toCategoryEntity(categoryRequest);
+        String name = categoryRepository.findById(id).get().getName();
 
-        category.setId(id);
+        if(categoryRepository.findByName(categoryRequest.getName()).isEmpty() ||
+                categoryRepository.findByName(categoryRequest.getName()).get().getName().equals(name)){
+            Category category = CategoryTransformer
+                    .toCategoryEntity(categoryRequest);
 
-        return categoryRepository.save(category).getId();
+            category.setId(id);
+            return categoryRepository.save(category).getId();
+        }else {
+            return -1;
+        }
     }
 
     public void deleteCategory(int id){

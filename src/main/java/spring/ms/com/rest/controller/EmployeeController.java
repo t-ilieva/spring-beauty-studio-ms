@@ -96,9 +96,9 @@ public class EmployeeController {
                                  RedirectAttributes redirectAttributes, Model model){
 
         int newId = employeeService.editEmployee(id, employeeResponse);
-        Optional<EmployeeResponse> employee = employeeService.getById(id);
+        Optional<EmployeeResponse> employee = employeeService.getById(newId);
         if(employee.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected employee!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating! Check if employee with the same employee number already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");

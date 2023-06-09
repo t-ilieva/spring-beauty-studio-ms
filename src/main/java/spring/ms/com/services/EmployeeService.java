@@ -95,22 +95,27 @@ public class EmployeeService {
         }
     }
 
-    public int editEmployee(int id, EmployeeResponse employeeResponse){
+    public int editEmployee(int id, EmployeeResponse employeeResponse) {
         Employee employee = EmployeeTransformer
                 .toEmployeeEntity(employeeResponse);
 
-//        CategoryResponse categoryResponse = employeeResponse.getCategoryResponse();
         LocationResponse locationResponse = employeeResponse.getLocationResponse();
 
-//        Category category = categoryRepository.findByName(categoryResponse.getName()).get();
         Location location = locationRepository.findByAddress(locationResponse.getAddress()).get();
 
-//        employee.setEmployeeCategory(category);
-        employee.setEmployeeLocation(location);
-        employee.setId(id);
+        String emplNum = employeeRepository.findById(id).get().getEmployeeNumber();
 
-        return employeeRepository.save(employee).getId();
+        if (employeeRepository.findByEmployeeNumber(employeeResponse.getEmployeeNumber()).isEmpty() ||
+                employeeRepository.findByEmployeeNumber(employeeResponse.getEmployeeNumber()).get().getEmployeeNumber().equals(emplNum)) {
+            employee.setEmployeeLocation(location);
+            employee.setId(id);
+
+            return employeeRepository.save(employee).getId();
+        } else {
+            return -1;
+        }
     }
+
     public void deleteEmployee(int id){
         employeeRepository.deleteById(id);
     }

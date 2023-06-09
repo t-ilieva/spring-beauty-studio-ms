@@ -81,9 +81,9 @@ public class CategoryController {
                                  RedirectAttributes redirectAttributes, Model model){
 
         int newId = categoryService.editCategory(id, categoryRequest);
-        Optional<CategoryResponse> category = categoryService.getById(id);
+        Optional<CategoryResponse> category = categoryService.getById(newId);
         if(category.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating selected category!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating! Check if category already exists!");
         }
         else{
             redirectAttributes.addFlashAttribute("successMessage", "Updated successfully!");
