@@ -2,7 +2,6 @@ package spring.ms.com.security;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.stereotype.Controller;
 
 @Data
 @Entity
