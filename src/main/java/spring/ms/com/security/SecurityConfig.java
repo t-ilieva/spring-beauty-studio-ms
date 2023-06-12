@@ -43,7 +43,6 @@ public class SecurityConfig{
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/plugins/**").permitAll()
                         .requestMatchers("/dist/**").permitAll()
-                        .requestMatchers("/fragment/**").permitAll()
                         .requestMatchers("/signUp/**").permitAll()
                         .anyRequest()
                         .fullyAuthenticated()
