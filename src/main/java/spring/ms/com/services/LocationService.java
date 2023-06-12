@@ -7,7 +7,6 @@ import spring.ms.com.rest.request.LocationRequest;
 import spring.ms.com.rest.response.LocationResponse;
 import spring.ms.com.rest.transformer.LocationTransformer;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
