@@ -5,7 +5,6 @@ import spring.ms.com.data.entity.Employee;
 import spring.ms.com.data.entity.Service;
 import spring.ms.com.data.repository.AppointmentRepository;
 import spring.ms.com.data.repository.EmployeeRepository;
-import spring.ms.com.data.repository.LocationRepository;
 import spring.ms.com.data.repository.ServiceRepository;
 import spring.ms.com.rest.request.*;
 import spring.ms.com.rest.response.*;
@@ -25,7 +24,7 @@ public class AppointmentService {
     private final ServiceService serviceService;
 
 
-    public AppointmentService(AppointmentRepository appointmentRepository, LocationRepository locationRepository, EmployeeRepository employeeRepository, ServiceRepository serviceRepository, LocationService locationService, EmployeeService employeeService, ServiceService serviceService) {
+    public AppointmentService(AppointmentRepository appointmentRepository, EmployeeRepository employeeRepository, ServiceRepository serviceRepository, EmployeeService employeeService, ServiceService serviceService) {
         this.appointmentRepository = appointmentRepository;
         this.employeeRepository = employeeRepository;
         this.serviceRepository = serviceRepository;
